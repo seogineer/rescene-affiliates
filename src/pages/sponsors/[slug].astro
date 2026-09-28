@@ -3,38 +3,46 @@ import Base from '../../layouts/Base.astro';
 import MediaCard from '../../components/MediaCard.astro';
 import { url, editUrl, newIssueUrl } from '../../config';
 import { getSponsors } from '../../lib/sponsors';
+import { ytThumb } from '../../lib/youtube';
 
 export async function getStaticPaths() {
 	const items = await getSponsors();
-	return items.map(({ entry, scene }) => ({ params: { slug: entry.id }, props: { entry, scene } }));
+	return items.map((item) => ({ params: { slug: item.entry.id }, props: item }));
 }
-const { entry, scene } = Astro.props;
+const { entry, scene, cover, tone } = Astro.props;
 const d = entry.data;
 const period = [d.startDate, d.endDate ?? (d.status === '진행중' ? '현재' : '')].filter(Boolean).join(' ~ ');
 ---
 <Base title={d.name}>
-	<a class="back" href={url()}>← 목록</a>
-	<div class="detail-head">
-		<div class="scene-no">SCENE {scene}</div>
-		<h1>{d.name}</h1>
+	<a class="back" href={url()}>← 함께한 기업 목록</a>
+	<div class="detail-head has-cover">
 		<div>
-			<span class={`badge ${d.status}`}>{d.status}</span>
-			<span class="badge">{d.type}</span>
-			{d.sample && <span class="badge sample">샘플</span>}
+			<div class="scene">SCENE {scene}</div>
+			<h1>{d.name}</h1>
+			<div class="badges">
+				<span class={`badge ${d.status}`}>{d.status}</span>
+				<span class="badge">{d.type}</span>
+				{d.sample && <span class="badge sample">샘플</span>}
+			</div>
+			{d.sample && <div class="notice">⚠️ 이 문서는 형식을 보여주는 예시 데이터이며 실제 후원 정보가 아닙니다.</div>}
+			<p class="desc">{d.summary}</p>
+			<div class="meta">
+				{period && <>기간 {period}</>}
+				{period && d.website && ' · '}
+				{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 사이트 ↗</a>}
+			</div>
+			<a class="edit" href={editUrl(entry.filePath!)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
 		</div>
-		{d.sample && <div class="notice">⚠️ 이 문서는 형식을 보여주는 예시 데이터이며 실제 후원 정보가 아닙니다.</div>}
-		<p class="desc">{d.summary}</p>
-		<p class="meta">
-			{period && <>기간 {period}</>}
-			{period && d.website && ' · '}
-			{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 사이트 ↗</a>}
-		</p>
-		<a class="edit" href={editUrl(entry.filePath!)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
+		{cover ? (
+			<div class="cover"><img src={ytThumb(cover)} alt="" /></div>
+		) : (
+			<div class={`cover blank tone-${tone}`}>{d.name.slice(0, 1)}</div>
+		)}
 	</div>
 
-	<h2 class="sec">이미지 · 영상</h2>
+	<h2 class="sec">장면들</h2>
 	{d.media.length === 0 ? (
-		<p class="meta">아직 등록된 미디어가 없습니다. <a href={newIssueUrl('add-media.yml')}>추가 제보하기</a></p>
+		<p class="meta">아직 기록된 이미지·영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>장면 제보하기</a></p>
 	) : (
 		<div class="media-grid">{d.media.map((m) => <MediaCard {...m} />)}</div>
 	)}

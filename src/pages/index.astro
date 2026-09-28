@@ -2,36 +2,80 @@
 import Base from '../layouts/Base.astro';
 import { url, newIssueUrl } from '../config';
 import { getSponsors } from '../lib/sponsors';
+import { ytThumb, ytWatch } from '../lib/youtube';
+import { HERO, OFFICIAL_MVS, OFFICIAL_CHANNEL } from '../data/official';
 
 const items = await getSponsors();
 const mediaCount = items.reduce((n, { entry }) => n + entry.data.media.length, 0);
+const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 ---
 <Base>
 	<section class="hero">
-		<div class="eyebrow">Re : Scene</div>
-		<h1>리센느 계열사</h1>
-		<p class="lead">리센느와 함께한 기업과, 기업이 공개한 이미지·영상 링크를 팬들이 함께 채워가는 위키입니다.</p>
-		<div class="stats"><span><b>{items.length}</b>기업</span><span><b>{mediaCount}</b>미디어</span></div>
+		<div class="eyebrow">Re : Scene with RESCENE</div>
+		<h1>리센느 <em>계열사</em></h1>
+		<p class="lead">리센느와 함께한 기업, 그리고 기업이 남긴 장면들을 팬들이 함께 기록합니다.</p>
+		<figure class="hero-photo">
+			<img src={ytThumb(HERO.id, 'maxresdefault')} alt="한복을 입은 리센느 멤버 다섯 명" />
+			<figcaption>사진 · <a href={ytWatch(HERO.id)} target="_blank" rel="noopener noreferrer">RESCENE 공식 유튜브 「{HERO.title}」</a></figcaption>
+		</figure>
+		<div class="stats">
+			<div class="stat"><b>{items.length}</b><span>함께한 기업</span></div>
+			<div class="stat"><b>{activeCount}</b><span>진행 중</span></div>
+			<div class="stat"><b>{mediaCount}</b><span>기록된 장면</span></div>
+		</div>
+		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
 	</section>
-	<p class="note">※ 소속사 계열사가 아니라, 리센느와 함께한 기업을 가리키는 팬들의 애칭입니다.</p>
-	<div class="notice">
-		잘못됐거나 빠진 내용을 발견하셨나요? 각 문서의 <strong>✏️ 이 문서 편집</strong>으로 직접 수정하거나,
-		<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a> · <a href={newIssueUrl('add-media.yml')}>미디어 추가 제보</a>를 남겨주세요.
+
+	<div class="sec-head">
+		<h2><small>Scenes with brands</small>함께한 기업</h2>
+		<p>최근 시작한 순서</p>
 	</div>
 	<div class="grid">
-		{items.map(({ entry: s, scene }) => (
-			<article class="card link">
-				<span class="film-holes" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-				<div class="scene-no">SCENE {scene}</div>
-				<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
-				<div>
-					<span class={`badge ${s.data.status}`}>{s.data.status}</span>
-					<span class="badge">{s.data.type}</span>
-					{s.data.sample && <span class="badge sample">샘플</span>}
+		{items.map(({ entry: s, scene, cover, tone }) => (
+			<article class="card">
+				{cover ? (
+					<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /><span class="scene-tag">SCENE {scene}</span></div>
+				) : (
+					<div class={`cover blank tone-${tone}`}>{s.data.name.slice(0, 1)}<span class="scene-tag">SCENE {scene}</span></div>
+				)}
+				<div class="card-body">
+					<div class="badges">
+						<span class={`badge ${s.data.status}`}>{s.data.status}</span>
+						<span class="badge">{s.data.type}</span>
+						{s.data.sample && <span class="badge sample">샘플</span>}
+					</div>
+					<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
+					<p>{s.data.summary}</p>
+					<div class="meta">
+						{s.data.startDate && <>{s.data.startDate}~ · </>}
+						{s.data.media.length > 0 ? `장면 ${s.data.media.length}개` : '장면 준비 중'}
+					</div>
 				</div>
-				<p>{s.data.summary}</p>
-				<div class="meta">{s.data.media.length > 0 ? `🎞 미디어 ${s.data.media.length}건` : '🎞 미디어 준비 중'}</div>
 			</article>
 		))}
 	</div>
+
+	<div class="sec-head">
+		<h2><small>Official MV</small>리센느의 장면들</h2>
+		<p><a href={OFFICIAL_CHANNEL} target="_blank" rel="noopener noreferrer">공식 유튜브 채널 ↗</a></p>
+	</div>
+	<div class="strip">
+		{OFFICIAL_MVS.map((mv) => (
+			<a href={ytWatch(mv.id)} target="_blank" rel="noopener noreferrer">
+				<div class="thumb"><img src={ytThumb(mv.id, 'maxresdefault')} alt="" loading="lazy" /></div>
+				<span>{mv.title}</span>
+			</a>
+		))}
+	</div>
+
+	<section class="contribute">
+		<div>
+			<h2>함께 기록해 주세요</h2>
+			<p>잘못된 내용은 각 문서의 ✏️ 편집으로 고치고, 새 기업이나 장면은 제보해 주세요.</p>
+		</div>
+		<div class="actions">
+			<a class="btn" href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>
+			<a class="btn ghost" href={newIssueUrl('add-media.yml')}>장면 제보</a>
+		</div>
+	</section>
 </Base>

@@ -12,28 +12,28 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 		<link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{full}</title>
 	</head>
 	<body>
 		<header class="site">
 			<div class="wrap">
-				<a class="brand" href={url()}>리센느 계열사<span class="dot">.</span><span class="tagline">리센느와 함께한 기업 위키</span></a>
+				<a class="brand" href={url()}><b>리센느 계열사</b><small>for REMINE</small></a>
 				<nav>
-					<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>
 					<a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>편집 가이드</a>
 					<a href={REPO_URL}>GitHub</a>
+					<a class="cta" href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>
 				</nav>
 			</div>
 		</header>
 		<main class="wrap"><slot /></main>
 		<footer class="site">
 			<div class="wrap">
-				<span class="remine">for REMINE</span>
+				<span class="remine">Re : Scene, for REMINE</span>
 				팬이 만든 비공식 사이트이며 소속사·기업과 무관합니다.<br />
-				이미지·영상은 원본 게시물 링크로만 연결하며, 저작권은 각 권리자에게 있습니다.
+				사진·영상은 공식 채널과 원본 게시물에서 불러오며, 저작권은 각 권리자에게 있습니다.
 			</div>
 		</footer>
 	</body>

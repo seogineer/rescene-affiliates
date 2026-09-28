@@ -1,4 +1,5 @@
 ---
+import { youtubeId } from '../lib/youtube';
 interface Props {
 	kind: 'image' | 'video';
 	platform: 'youtube' | 'instagram' | 'x' | 'tiktok' | 'web';
@@ -9,26 +10,19 @@ interface Props {
 const { kind, platform, url, title, date } = Astro.props;
 
 // YouTube만 iframe으로 임베드하고, 나머지는 원본 게시물로 연결하는 카드로 보여준다.
-function youtubeId(u: string) {
-	try {
-		const p = new URL(u);
-		if (p.hostname === 'youtu.be') return p.pathname.slice(1);
-		if (p.hostname.endsWith('youtube.com')) {
-			if (p.pathname.startsWith('/shorts/')) return p.pathname.split('/')[2];
-			return p.searchParams.get('v');
-		}
-	} catch {}
-	return null;
-}
 const ytId = platform === 'youtube' ? youtubeId(url) : null;
 const label = { youtube: 'YouTube', instagram: 'Instagram', x: 'X', tiktok: 'TikTok', web: '웹' }[platform];
 ---
-<div class="frame">
+<figure class="media">
 	{ytId ? (
 		<iframe class="embed" src={`https://www.youtube-nocookie.com/embed/${ytId}`} title={title} loading="lazy" allowfullscreen></iframe>
 	) : (
-		<p><a href={url} target="_blank" rel="noopener noreferrer">{kind === 'video' ? '▶️' : '🖼️'} {label}에서 보기 ↗</a></p>
+		<a class="embed link-out" href={url} target="_blank" rel="noopener noreferrer">
+			<span>{kind === 'video' ? '▶' : '◎'}</span>{label}에서 보기 ↗
+		</a>
 	)}
-	<strong>{title}</strong>
-	<div class="meta">{kind === 'video' ? '영상' : '이미지'} · {label}{date ? ` · ${date}` : ''}</div>
-</div>
+	<figcaption>
+		<strong>{title}</strong>
+		<span class="meta">{kind === 'video' ? '영상' : '이미지'} · {label}{date ? ` · ${date}` : ''}</span>
+	</figcaption>
+</figure>
