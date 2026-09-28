@@ -9,3 +9,32 @@ sources:
     url: https://www.efnews.co.kr/news/articleView.html?idxno=130960
   - title: "'리센느 야호!'… 광고계 휩쓴 리센느, '유니버스'로 확장 (브랜드브리프, 2026-08-12)"
     url: https://www.brandbrief.co.kr/news/articleView.html?idxno=10187
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=9cJIVzT7YVY
+    title: "[무슈스 x 리센느] 무슈스 함 무 보이소_사투리 ver."
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=DD3jJIyrFe4
+    title: "도미노 무슈스 피자 출시 (리브편)"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=RA_MzUSzSb8
+    title: "도미노 무슈스 피자 출시 (미나미편)"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=2F-GUn8uxns
+    title: "도미노 무슈스 피자 출시 (메이편)"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=25zXP7m89sM
+    title: "도미노 무슈스 피자 출시 (제나편)"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=oSqpWyEdxtc
+    title: "도미노 무슈스 피자 출시 (원이편)"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=7VHpptJokGA
+    title: "[도미노피자 x 무신사] 무진장 슈림프 스테이크 피자 출시!"
