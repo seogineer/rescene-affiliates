@@ -6,8 +6,8 @@ export const REPO_URL = `https://github.com/${REPO}`;
 export const url = (path = '') =>
 	`${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 
-export const editUrl = (id: string) =>
-	`${REPO_URL}/edit/${BRANCH}/src/content/sponsors/${id}.yaml`;
+/** filePath는 저장소 기준 상대경로(entry.filePath). 파일명이 id로 바뀌어도 실제 파일을 가리킨다. */
+export const editUrl = (filePath: string) => `${REPO_URL}/edit/${BRANCH}/${filePath}`;
 
 export const newIssueUrl = (template: string) =>
 	`${REPO_URL}/issues/new?template=${template}`;

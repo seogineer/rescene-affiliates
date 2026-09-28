@@ -11,6 +11,6 @@ sources:
 media:
   - kind: video
     platform: youtube
-    url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    url: https://www.youtube.com/watch?v=aqz-KE-bpKQ
     title: 예시 영상 (임베드 형식 확인용)
     date: 2025-01-01

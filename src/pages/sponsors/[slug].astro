@@ -26,7 +26,7 @@ const period = [d.startDate, d.endDate ?? (d.status === '진행중' ? '현재' :
 		{period && <>기간: {period} · </>}
 		{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 사이트 ↗</a>}
 	</p>
-	<a class="edit" href={editUrl(entry.id)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
+	<a class="edit" href={editUrl(entry.filePath!)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
 
 	<h2>이미지 · 영상</h2>
 	{d.media.length === 0 ? (
