@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { url, REPO_URL, newIssueUrl } from '../config';
 interface Props { title?: string }
 const { title } = Astro.props;
-const full = title ? `${title} · 리센느 후원 기업 위키` : '리센느 후원 기업 위키';
+const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 · 리센느와 함께한 기업 위키';
 ---
 <html lang="ko">
 	<head>
@@ -16,7 +16,7 @@ const full = title ? `${title} · 리센느 후원 기업 위키` : '리센느 �
 	<body>
 		<header class="site">
 			<div class="wrap">
-				<a class="brand" href={url()}>리센느 후원 기업 위키</a>
+				<a class="brand" href={url()}>리센느 계열사 <small class="tagline">리센느와 함께한 기업 위키</small></a>
 				<nav>
 					<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>
 					<a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>편집 가이드</a>
