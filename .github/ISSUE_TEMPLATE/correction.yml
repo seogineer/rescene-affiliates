@@ -1,0 +1,21 @@
+name: 정정·삭제 요청
+description: 잘못된 정보의 정정이나 게시물 삭제를 요청합니다
+title: "[정정] "
+labels: ["정정"]
+body:
+  - type: input
+    id: page
+    attributes: { label: 해당 문서 또는 주소 }
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 요청 종류
+      options: [내용 정정, 이미지·영상 삭제, 문서 삭제, 기타]
+    validations: { required: true }
+  - type: textarea
+    id: detail
+    attributes:
+      label: 내용
+      description: 올바른 정보와 근거 링크를 함께 적어주세요. 권리자라면 그 사실도 적어주세요.
+    validations: { required: true }

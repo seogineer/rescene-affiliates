@@ -13,7 +13,7 @@ const { entry, scene, cover, tone } = Astro.props;
 const d = entry.data;
 const period = [d.startDate, d.endDate ?? (d.status === '진행중' ? '현재' : '')].filter(Boolean).join(' ~ ');
 ---
-<Base title={d.name}>
+<Base title={d.name} description={d.summary} image={cover ? ytThumb(cover) : undefined}>
 	<a class="back" href={url()}>← 함께한 기업 목록</a>
 	<div class="detail-head has-cover">
 		<div>

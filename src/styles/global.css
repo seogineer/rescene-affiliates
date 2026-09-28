@@ -99,6 +99,24 @@ nav a.cta:hover { background: var(--indigo); }
 .badge.sample { color: #b86e00; border-color: #e0a95a; }
 .meta { color: var(--muted); font-size: .85rem; }
 
+/* filters */
+.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 0 0 20px; }
+.filters input, .filters select { font: inherit; font-size: .92rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 8px 16px; }
+.filters input { flex: 1 1 220px; min-width: 0; }
+.filters input:focus, .filters select:focus { outline: 2px solid var(--rose); outline-offset: 1px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: .88rem; font-weight: 600; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 7px 14px; cursor: pointer; }
+.chip.on { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+[hidden] { display: none !important; }
+
+/* about / 404 */
+.prose { max-width: 720px; margin: 40px auto 0; }
+.prose h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.2; margin: 0 0 12px; }
+.prose h2 { font-family: var(--display); font-size: 1.4rem; margin: 36px 0 8px; }
+.prose ul { padding-left: 1.2em; }
+.center { text-align: center; padding: 96px 0 40px; }
+.center .big { font-family: var(--latin); font-style: italic; font-size: 5rem; line-height: 1; color: var(--rose); }
+
 /* official MV strip */
 .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 1fr); gap: 18px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
 .strip a { scroll-snap-align: start; text-decoration: none; color: var(--fg); }

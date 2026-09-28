@@ -8,8 +8,10 @@ import { HERO, OFFICIAL_MVS, OFFICIAL_CHANNEL } from '../data/official';
 const items = await getSponsors();
 const mediaCount = items.reduce((n, { entry }) => n + entry.data.media.length, 0);
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
+const statuses = ['진행중', '확인필요', '종료'].filter((st) => items.some(({ entry }) => entry.data.status === st));
+const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 ---
-<Base>
+<Base image={ytThumb(HERO.id, 'maxresdefault')}>
 	<section class="hero">
 		<div class="eyebrow">Re : Scene with RESCENE</div>
 		<h1>리센느 <em>계열사</em></h1>
@@ -30,9 +32,21 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 		<h2><small>Scenes with brands</small>함께한 기업</h2>
 		<p>최근 시작한 순서</p>
 	</div>
-	<div class="grid">
+	<div class="filters" role="search">
+		<input id="q" type="search" placeholder="기업 이름·내용 검색" aria-label="기업 검색" />
+		<div class="chips" id="status-chips">
+			<button type="button" class="chip on" data-status="">전체</button>
+			{statuses.map((st) => <button type="button" class="chip" data-status={st}>{st}</button>)}
+		</div>
+		<select id="type" aria-label="후원 형태">
+			<option value="">모든 형태</option>
+			{types.map((t) => <option value={t}>{t}</option>)}
+		</select>
+	</div>
+	<p id="empty" class="meta" hidden>조건에 맞는 기업이 없습니다. <a href={newIssueUrl('new-sponsor.yml')}>기업 제보하기</a></p>
+	<div class="grid" id="grid">
 		{items.map(({ entry: s, scene, cover, tone }) => (
-			<article class="card">
+			<article class="card" data-status={s.data.status} data-type={s.data.type} data-text={`${s.data.name} ${s.data.summary}`.toLowerCase()}>
 				{cover ? (
 					<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /><span class="scene-tag">SCENE {scene}</span></div>
 				) : (
@@ -67,6 +81,37 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 			</a>
 		))}
 	</div>
+
+	<script>
+		const q = document.querySelector<HTMLInputElement>('#q')!;
+		const typeSel = document.querySelector<HTMLSelectElement>('#type')!;
+		const chips = [...document.querySelectorAll<HTMLButtonElement>('#status-chips .chip')];
+		const cards = [...document.querySelectorAll<HTMLElement>('#grid .card')];
+		const empty = document.querySelector<HTMLElement>('#empty')!;
+		let status = '';
+		function apply() {
+			const text = q.value.trim().toLowerCase();
+			let shown = 0;
+			for (const c of cards) {
+				const ok =
+					(!status || c.dataset.status === status) &&
+					(!typeSel.value || c.dataset.type === typeSel.value) &&
+					(!text || c.dataset.text!.includes(text));
+				c.hidden = !ok;
+				if (ok) shown++;
+			}
+			empty.hidden = shown > 0;
+		}
+		q.addEventListener('input', apply);
+		typeSel.addEventListener('change', apply);
+		for (const b of chips) {
+			b.addEventListener('click', () => {
+				status = b.dataset.status ?? '';
+				chips.forEach((x) => x.classList.toggle('on', x === b));
+				apply();
+			});
+		}
+	</script>
 
 	<section class="contribute">
 		<div>

@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../config';
+---
+<Base title="페이지를 찾을 수 없어요">
+	<section class="center">
+		<div class="big">404</div>
+		<h1 style="font-family: var(--display)">찾으시는 장면이 없어요</h1>
+		<p class="meta">주소가 바뀌었거나 아직 만들어지지 않은 페이지예요.</p>
+		<p><a class="edit" href={url()}>목록으로 돌아가기</a></p>
+	</section>
+</Base>
