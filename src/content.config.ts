@@ -2,10 +2,10 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// YAML은 따옴표 없는 2025-01-01을 Date로 읽으므로, 문자열/Date 모두 받아 문자열로 통일한다.
+// YAML은 따옴표 없는 2025-01-01을 Date로, 2025를 숫자로 읽으므로 모두 받아 문자열로 통일한다.
 const dateStr = z
-	.union([z.string(), z.date()])
-	.transform((v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v));
+	.union([z.string(), z.number(), z.date()])
+	.transform((v) => (v instanceof Date ? v.toISOString().slice(0, 10) : String(v)));
 
 const sponsors = defineCollection({
 	loader: glob({ pattern: '**/*.yaml', base: './src/content/sponsors' }),
