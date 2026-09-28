@@ -1,17 +1,31 @@
 ---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { url, newIssueUrl } from '../config';
 
+const sponsors = (await getCollection('sponsors')).sort((a, b) =>
+	(b.data.startDate ?? '').localeCompare(a.data.startDate ?? ''),
+);
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+	<h1>리센느(RESCENE) 후원 기업</h1>
+	<p>리센느를 후원했거나 후원 중인 기업과, 기업이 공개한 관련 이미지·영상 링크를 팬들이 함께 정리하는 위키입니다.</p>
+	<div class="notice">
+		잘못됐거나 빠진 내용을 발견하셨나요? 각 문서의 <strong>✏️ 이 문서 편집</strong>으로 직접 수정하거나,
+		<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>·<a href={newIssueUrl('add-media.yml')}>미디어 추가 제보</a>를 남겨주세요.
+	</div>
+	<div class="grid">
+		{sponsors.map((s) => (
+			<article class="card">
+				<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
+				<div>
+					<span class={`badge ${s.data.status}`}>{s.data.status}</span>
+					<span class="badge">{s.data.type}</span>
+					{s.data.sample && <span class="badge sample">샘플</span>}
+				</div>
+				<p>{s.data.summary}</p>
+				<div class="meta">미디어 {s.data.media.length}건</div>
+			</article>
+		))}
+	</div>
+</Base>
