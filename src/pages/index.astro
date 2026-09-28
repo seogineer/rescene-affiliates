@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { url, newIssueUrl } from '../config';
 import { getSponsors } from '../lib/sponsors';
 import { ytThumb, ytWatch } from '../lib/youtube';
-import { HERO, OFFICIAL_MVS, OFFICIAL_CHANNEL } from '../data/official';
+import { HERO } from '../data/official';
 
 const items = await getSponsors();
 const mediaCount = items.reduce((n, { entry }) => n + entry.data.media.length, 0);
@@ -66,19 +66,6 @@ const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 					</div>
 				</div>
 			</article>
-		))}
-	</div>
-
-	<div class="sec-head">
-		<h2><small>Official MV</small>리센느 MV 다시 보기</h2>
-		<p><a href={OFFICIAL_CHANNEL} target="_blank" rel="noopener noreferrer">공식 유튜브 채널 ↗</a></p>
-	</div>
-	<div class="strip">
-		{OFFICIAL_MVS.map((mv) => (
-			<a href={ytWatch(mv.id)} target="_blank" rel="noopener noreferrer">
-				<div class="thumb"><img src={ytThumb(mv.id, 'maxresdefault')} alt="" loading="lazy" /></div>
-				<span>{mv.title}</span>
-			</a>
 		))}
 	</div>
 
