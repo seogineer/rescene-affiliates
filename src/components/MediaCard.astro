@@ -23,7 +23,7 @@ function youtubeId(u: string) {
 const ytId = platform === 'youtube' ? youtubeId(url) : null;
 const label = { youtube: 'YouTube', instagram: 'Instagram', x: 'X', tiktok: 'TikTok', web: '웹' }[platform];
 ---
-<div class="card">
+<div class="frame">
 	{ytId ? (
 		<iframe class="embed" src={`https://www.youtube-nocookie.com/embed/${ytId}`} title={title} loading="lazy" allowfullscreen></iframe>
 	) : (

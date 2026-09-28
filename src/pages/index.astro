@@ -1,23 +1,28 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { url, newIssueUrl } from '../config';
+import { getSponsors } from '../lib/sponsors';
 
-const sponsors = (await getCollection('sponsors')).sort((a, b) =>
-	(b.data.startDate ?? '').localeCompare(a.data.startDate ?? ''),
-);
+const items = await getSponsors();
+const mediaCount = items.reduce((n, { entry }) => n + entry.data.media.length, 0);
 ---
 <Base>
-	<h1>리센느 계열사</h1>
-	<p class="meta">※ 소속사 계열사가 아니라, 리센느와 함께한 기업을 가리키는 팬들의 애칭입니다.</p>
-	<p>리센느를 후원했거나 후원 중인 기업과, 기업이 공개한 관련 이미지·영상 링크를 팬들이 함께 정리하는 위키입니다.</p>
+	<section class="hero">
+		<div class="eyebrow">Re : Scene</div>
+		<h1>리센느 계열사</h1>
+		<p class="lead">리센느와 함께한 기업과, 기업이 공개한 이미지·영상 링크를 팬들이 함께 채워가는 위키입니다.</p>
+		<div class="stats"><span><b>{items.length}</b>기업</span><span><b>{mediaCount}</b>미디어</span></div>
+	</section>
+	<p class="note">※ 소속사 계열사가 아니라, 리센느와 함께한 기업을 가리키는 팬들의 애칭입니다.</p>
 	<div class="notice">
 		잘못됐거나 빠진 내용을 발견하셨나요? 각 문서의 <strong>✏️ 이 문서 편집</strong>으로 직접 수정하거나,
-		<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a>·<a href={newIssueUrl('add-media.yml')}>미디어 추가 제보</a>를 남겨주세요.
+		<a href={newIssueUrl('new-sponsor.yml')}>기업 제보</a> · <a href={newIssueUrl('add-media.yml')}>미디어 추가 제보</a>를 남겨주세요.
 	</div>
 	<div class="grid">
-		{sponsors.map((s) => (
-			<article class="card">
+		{items.map(({ entry: s, scene }) => (
+			<article class="card link">
+				<span class="film-holes" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+				<div class="scene-no">SCENE {scene}</div>
 				<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
 				<div>
 					<span class={`badge ${s.data.status}`}>{s.data.status}</span>
@@ -25,7 +30,7 @@ const sponsors = (await getCollection('sponsors')).sort((a, b) =>
 					{s.data.sample && <span class="badge sample">샘플</span>}
 				</div>
 				<p>{s.data.summary}</p>
-				<div class="meta">미디어 {s.data.media.length}건</div>
+				<div class="meta">{s.data.media.length > 0 ? `🎞 미디어 ${s.data.media.length}건` : '🎞 미디어 준비 중'}</div>
 			</article>
 		))}
 	</div>
