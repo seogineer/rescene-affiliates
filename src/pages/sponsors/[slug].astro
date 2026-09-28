@@ -40,9 +40,9 @@ const period = [d.startDate, d.endDate ?? (d.status === '진행중' ? '현재' :
 		)}
 	</div>
 
-	<h2 class="sec">장면들</h2>
+	<h2 class="sec">이미지 · 영상</h2>
 	{d.media.length === 0 ? (
-		<p class="meta">아직 기록된 이미지·영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>장면 제보하기</a></p>
+		<p class="meta">아직 기록된 이미지·영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>이미지·영상 제보하기</a></p>
 	) : (
 		<div class="media-grid">{d.media.map((m) => <MediaCard {...m} />)}</div>
 	)}
