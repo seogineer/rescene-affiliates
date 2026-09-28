@@ -6,7 +6,6 @@ import { ytThumb, ytWatch } from '../lib/youtube';
 import { HERO } from '../data/official';
 
 const items = await getSponsors();
-const mediaCount = items.reduce((n, { entry }) => n + entry.data.media.length, 0);
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 const statuses = ['진행중', '확인필요', '종료'].filter((st) => items.some(({ entry }) => entry.data.status === st));
 const types = [...new Set(items.map(({ entry }) => entry.data.type))];
@@ -23,7 +22,6 @@ const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 		<div class="stats">
 			<div class="stat"><b>{items.length}</b><span>함께한 기업</span></div>
 			<div class="stat"><b>{activeCount}</b><span>진행 중</span></div>
-			<div class="stat"><b>{mediaCount}</b><span>이미지·영상</span></div>
 		</div>
 		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
 	</section>

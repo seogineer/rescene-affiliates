@@ -160,7 +160,7 @@ footer.site .remine { display: block; font-family: var(--latin); font-style: ita
 	/* 로고가 잘리는 12:5 비율은 유지하고, 화면 끝까지 넓혀 사진을 키운다. */
 	.hero-photo { margin: 28px -16px 0; border-radius: 0; box-shadow: none; }
 	.hero-photo figcaption { top: auto; bottom: 8px; right: 8px; font-size: .66rem; padding: 3px 8px; }
-	.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+	.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
 	.stat { min-width: 0; padding: 10px 4px; border-radius: 14px; }
 	.stat b { font-size: 1.4rem; }
 	.stat span { font-size: .75rem; }
