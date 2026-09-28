@@ -1,0 +1,23 @@
+name: 카카오톡
+summary: 카카오톡의 '대화를 하자' 캠페인 모델. 카카오톡 AI 기능을 알리는 캠페인으로, 2026년 9월 한 달 동안 여러 에피소드를 순차 공개한다고 2026년 9월 2일 밝혔다.
+type: 광고모델
+status: 진행중
+startDate: 2026-09
+sources:
+  - title: "카카오, '리센느'와 일상 속 AI 경험 알린다 (카카오 보도자료, 2026-09-02)"
+    url: https://www.kakaocorp.com/page/detail/12126
+  - title: "리센느가 알려주는 카톡 AI…카카오, 새 캠페인 시작 (한국경제, 2026-09-02)"
+    url: https://www.hankyung.com/article/202609028958g
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=uZRxcidgEvE
+    title: "대화를 하자 | 리센느도 대화를 하자"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=VbuSCfQlu2A
+    title: "대화를 하자 l 리센느, 휴가 다녀오겠습니다!"
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=AEGUmtHK47w
+    title: "대화를 하자 l 리센느의 똑똑한 통화법"
