@@ -1,12 +1,10 @@
 name: 할리스
 summary: 1998년 창립 이래 28년 만에 처음으로 브랜드 광고 모델로 리센느를 발탁했다. 멤버들은 지역 아이콘으로도 활동한다고 보도됐다.
 type: 광고모델
-status: 진행중
+status: 진행중입니다
 startDate: 2026-08
 website: https://www.hollys.co.kr
-sources:
-  - title: "할리스, 최초 브랜드 모델로 걸그룹 '리센느' 발탁 (스포츠경향, 2026-08-18)"
-    url: https://sports.khan.co.kr/en/article/202608182110007/
+sources: []
 media:
   - kind: video
     platform: youtube
