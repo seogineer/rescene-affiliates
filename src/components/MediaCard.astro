@@ -6,8 +6,9 @@ interface Props {
 	url: string;
 	title: string;
 	date?: string;
+	orientation?: 'landscape' | 'portrait';
 }
-const { kind, platform, url, title, date } = Astro.props;
+const { kind, platform, url, title, date, orientation = 'landscape' } = Astro.props;
 
 // YouTube만 iframe으로 임베드하고, 나머지는 원본 게시물로 연결하는 카드로 보여준다.
 const ytId = platform === 'youtube' ? youtubeId(url) : null;
@@ -15,7 +16,7 @@ const label = { youtube: 'YouTube', instagram: 'Instagram', x: 'X', tiktok: 'Tik
 ---
 <figure class="media">
 	{ytId ? (
-		<iframe class="embed" src={`https://www.youtube-nocookie.com/embed/${ytId}`} title={title} loading="lazy" allowfullscreen></iframe>
+		<iframe class:list={['embed', { portrait: orientation === 'portrait' }]} src={`https://www.youtube-nocookie.com/embed/${ytId}`} title={title} loading="lazy" allowfullscreen></iframe>
 	) : (
 		<a class="embed link-out" href={url} target="_blank" rel="noopener noreferrer">
 			<span>{kind === 'video' ? '▶' : '◎'}</span>{label}에서 보기 ↗

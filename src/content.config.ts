@@ -31,6 +31,8 @@ const sponsors = defineCollection({
 					platform: z.enum(['youtube', 'instagram', 'x', 'tiktok', 'web']),
 					url: z.url(),
 					title: z.string(),
+					// 유튜브 쇼츠 같은 세로 영상은 portrait로 적으면 세로 비율로 보여준다.
+					orientation: z.enum(['landscape', 'portrait']).default('landscape'),
 					date: dateStr.optional(),
 				}),
 			)

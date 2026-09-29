@@ -139,9 +139,10 @@ nav a.cta:hover { background: var(--indigo); }
 h2.sec { font-family: var(--display); font-size: 1.7rem; margin: 56px 0 18px; display: flex; align-items: center; gap: 14px; }
 h2.sec::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
-.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+.media-grid { align-items: start; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
 .media { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
 .embed { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+.embed.portrait { aspect-ratio: 9 / 16; width: min(100%, 230px); margin: 0 auto; }
 .embed.link-out { display: grid; place-content: center; justify-items: center; gap: 6px; text-decoration: none; font-weight: 600; color: #fff; background: linear-gradient(135deg, var(--peri), var(--indigo)); }
 .embed.link-out span { font-size: 2rem; }
 .media figcaption { padding: 14px 18px 16px; }

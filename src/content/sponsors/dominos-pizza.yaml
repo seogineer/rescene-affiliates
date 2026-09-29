@@ -17,24 +17,30 @@ media:
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=DD3jJIyrFe4
+    orientation: portrait
     title: "도미노 무슈스 피자 출시 (리브편)"
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=RA_MzUSzSb8
+    orientation: portrait
     title: "도미노 무슈스 피자 출시 (미나미편)"
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=2F-GUn8uxns
+    orientation: portrait
     title: "도미노 무슈스 피자 출시 (메이편)"
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=25zXP7m89sM
+    orientation: portrait
     title: "도미노 무슈스 피자 출시 (제나편)"
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=oSqpWyEdxtc
+    orientation: portrait
     title: "도미노 무슈스 피자 출시 (원이편)"
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=7VHpptJokGA
+    orientation: portrait
     title: "[도미노피자 x 무신사] 무진장 슈림프 스테이크 피자 출시!"
