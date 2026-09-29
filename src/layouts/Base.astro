@@ -4,6 +4,7 @@ import { url, REPO_URL, newIssueUrl } from '../config';
 interface Props { title?: string; description?: string; image?: string }
 const DEFAULT_DESC = '리센느와 함께한 기업과 기업이 공개한 이미지·영상을 팬들이 함께 기록하는 비공식 팬 위키';
 const { title, description = DEFAULT_DESC, image } = Astro.props;
+const updated = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Seoul' }).format(new Date());
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 · 리센느와 함께한 기업 위키';
 ---
@@ -44,8 +45,15 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 		<footer class="site">
 			<div class="wrap">
 				<span class="remine">Re : Scene, for REMINE</span>
+				<nav class="foot-nav">
+					<a href={url('about/')}>소개</a>
+					<a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>편집 가이드</a>
+					<a href={newIssueUrl('correction.yml')}>정정·삭제 요청</a>
+					<a href={REPO_URL}>GitHub</a>
+				</nav>
 				팬이 만든 비공식 사이트이며 소속사·기업과 무관합니다.<br />
-				사진·영상은 공식 채널과 원본 게시물에서 불러오며, 저작권은 각 권리자에게 있습니다.
+				사진·영상은 공식 채널과 원본 게시물에서 불러오며, 저작권은 각 권리자에게 있습니다.<br />
+				마지막 배포 {updated}
 			</div>
 		</footer>
 	</body>

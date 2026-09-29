@@ -44,11 +44,11 @@ header.site .wrap { display: flex; justify-content: space-between; align-items: 
 a.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--fg); }
 a.brand b { font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
 a.brand small { font-family: var(--latin); font-style: italic; font-size: 1rem; color: var(--rose); letter-spacing: .08em; }
-nav { display: flex; gap: 6px; }
-nav a { font-size: .88rem; font-weight: 500; text-decoration: none; color: var(--fg); padding: 7px 14px; border-radius: 99px; transition: background .15s; }
-nav a:hover { background: var(--line); }
-nav a.cta { background: var(--fg); color: var(--bg); }
-nav a.cta:hover { background: var(--indigo); }
+header.site nav { display: flex; gap: 6px; }
+header.site nav a { font-size: .88rem; font-weight: 500; text-decoration: none; color: var(--fg); padding: 7px 14px; border-radius: 99px; transition: background .15s; }
+header.site nav a:hover { background: var(--line); }
+header.site nav a.cta { background: var(--fg); color: var(--bg); }
+header.site nav a.cta:hover { background: var(--indigo); }
 
 /* hero */
 .hero { padding: 56px 0 0; text-align: center; }
@@ -153,10 +153,14 @@ ol.sources li { margin: 8px 0; }
 footer.site { margin-top: 88px; padding: 36px 0 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; text-align: center; }
 footer.site .remine { display: block; font-family: var(--latin); font-style: italic; font-size: 1.2rem; color: var(--rose); margin-bottom: 8px; }
 
+footer.site .foot-nav { display: flex; justify-content: center; gap: 4px 18px; flex-wrap: wrap; margin: 0 0 14px; }
+footer.site .foot-nav a { color: var(--fg); font-size: .88rem; text-decoration: none; }
+footer.site .foot-nav a:hover { color: var(--rose); }
+
 @media (max-width: 720px) {
 	body { font-size: 16px; }
 	a.brand small { display: none; }
-	nav a:not(.cta) { display: none; }
+	header.site nav a:not(.cta) { display: none; }
 	.hero { padding-top: 36px; }
 	/* 로고가 잘리는 12:5 비율은 유지하고, 화면 끝까지 넓혀 사진을 키운다. */
 	.hero-photo { margin: 28px -16px 0; border-radius: 0; box-shadow: none; }
