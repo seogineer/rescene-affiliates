@@ -32,6 +32,8 @@ npm run dev      # http://localhost:4321/rescene-affiliates/
 npm run build
 ```
 
-## 저작권
+## 라이선스와 저작권
+코드는 [MIT 라이선스](LICENSE)입니다. 기업 문서(`src/content/sponsors/`)는 기사 등 공개 자료를 정리한 것이며, 각 출처의 저작권은 원저작자에게 있습니다.
+
 소속사·기업과 무관한 팬 사이트입니다. 사진·영상은 공식 채널과 원본 게시물에서 불러오며, 저작권은 각 권리자에게 있습니다.
 삭제 요청은 [이슈](../../issues/new?template=correction.yml)로 남겨주시면 확인 후 반영합니다.
