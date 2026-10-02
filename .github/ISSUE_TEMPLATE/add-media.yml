@@ -1,11 +1,11 @@
 name: 이미지·영상 추가 제보
-description: 기업이 올린 리센느 관련 게시물 링크를 제보합니다
+description: 기업·방송사·채널이 올린 리센느 관련 게시물 링크를 제보합니다
 title: "[미디어] "
 labels: ["제보"]
 body:
   - type: input
     id: company
-    attributes: { label: 기업명 }
+    attributes: { label: 기업명 또는 프로그램·채널 이름 }
     validations: { required: true }
   - type: input
     id: url

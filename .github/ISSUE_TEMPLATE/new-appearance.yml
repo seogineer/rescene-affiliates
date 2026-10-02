@@ -1,0 +1,32 @@
+name: 출연 제보
+description: 리센느가 출연한 유튜브 채널·예능·라디오·음악방송을 제보합니다
+title: "[출연] "
+labels: ["제보"]
+body:
+  - type: input
+    id: name
+    attributes: { label: 프로그램·채널 이름 }
+    validations: { required: true }
+  - type: dropdown
+    id: category
+    attributes:
+      label: 종류
+      options: [유튜브·웹예능, TV 예능, 라디오, 음악방송]
+    validations: { required: true }
+  - type: input
+    id: broadcaster
+    attributes: { label: 방송사·채널, description: "예: MBC, KBS Kpop, 채널 이름" }
+  - type: textarea
+    id: media
+    attributes:
+      label: 출연 영상 링크
+      description: 방송사·채널이 올린 공식 영상 주소만 적어주세요. 팬 재업로드는 받지 않습니다.
+  - type: textarea
+    id: source
+    attributes:
+      label: 출처 링크 (필수)
+      description: 기사, 공식 SNS 게시물 등 출연 사실을 확인할 수 있는 링크를 적어주세요.
+    validations: { required: true }
+  - type: textarea
+    id: note
+    attributes: { label: 기타 설명 }

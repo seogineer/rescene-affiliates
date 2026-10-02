@@ -1,8 +1,8 @@
 # 리센느 계열사
 
-> 리센느와 함께한 기업 위키
+> 리센느와 함께한 기업·출연 위키
 
-리센느와 함께한 기업, 그리고 기업이 공개한 이미지·영상 링크를 팬들이 함께 기록하는 **비공식 팬 사이트**입니다.
+리센느와 함께한 기업과 출연 프로그램, 그리고 공개된 이미지·영상 링크를 팬들이 함께 기록하는 **비공식 팬 사이트**입니다.
 '계열사'는 소속사의 계열사가 아니라 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.
 
 **🔗 https://remine.fan**
@@ -14,7 +14,8 @@
 |---|---|
 | 잘못된 내용 고치기 | 사이트의 **✏️ 이 문서 편집**을 눌러 수정 후 PR |
 | 새 기업 추가하기 | `src/content/sponsors/` 에 파일 추가 후 PR |
-| 파일이 부담스럽다면 | [기업 제보](../../issues/new?template=new-sponsor.yml) · [이미지·영상 제보](../../issues/new?template=add-media.yml) |
+| 새 출연 추가하기 | `src/content/appearances/` 에 파일 추가 후 PR |
+| 파일이 부담스럽다면 | [기업 제보](../../issues/new?template=new-sponsor.yml) · [출연 제보](../../issues/new?template=new-appearance.yml) · [이미지·영상 제보](../../issues/new?template=add-media.yml) |
 | 삭제·정정 요청 | [정정·삭제 요청](../../issues/new?template=correction.yml) |
 
 자세한 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md)를 봐주세요. 핵심은 세 가지예요.
