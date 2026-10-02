@@ -1,0 +1,76 @@
+---
+import { url, newIssueUrl } from '../config';
+import { getSponsors } from '../lib/sponsors';
+import { ytThumb } from '../lib/youtube';
+const items = await getSponsors();
+const statuses = ['진행중', '확인필요', '종료'].filter((st) => items.some(({ entry }) => entry.data.status === st));
+const types = [...new Set(items.map(({ entry }) => entry.data.type))];
+---
+<div class="filters" role="search">
+	<input id="s-q" type="search" placeholder="기업 이름·내용 검색" aria-label="기업 검색" />
+	<div class="chips" id="s-chips">
+		<button type="button" class="chip on" data-status="">전체</button>
+		{statuses.map((st) => <button type="button" class="chip" data-status={st}>{st}</button>)}
+	</div>
+	<select id="s-type" aria-label="후원 형태">
+		<option value="">모든 형태</option>
+		{types.map((t) => <option value={t}>{t}</option>)}
+	</select>
+</div>
+<p class="meta sort-note">최근 시작한 순서</p>
+<p id="s-empty" class="meta" hidden>조건에 맞는 기업이 없습니다. <a href={newIssueUrl('new-sponsor.yml')}>기업 제보하기</a></p>
+<div class="grid" id="s-grid">
+	{items.map(({ entry: s, scene, cover, tone }) => (
+		<article class="card" data-status={s.data.status} data-type={s.data.type} data-text={`${s.data.name} ${s.data.summary}`.toLowerCase()}>
+			{cover ? (
+				<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /><span class="scene-tag">SCENE {scene}</span></div>
+			) : (
+				<div class={`cover blank tone-${tone}`}>{s.data.name.slice(0, 1)}<span class="scene-tag">SCENE {scene}</span></div>
+			)}
+			<div class="card-body">
+				<div class="badges">
+					<span class={`badge ${s.data.status}`}>{s.data.status}</span>
+					<span class="badge">{s.data.type}</span>
+					{s.data.sample && <span class="badge sample">샘플</span>}
+				</div>
+				<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
+				<p>{s.data.summary}</p>
+				<div class="meta">
+					{s.data.startDate && <>{s.data.startDate}~ · </>}
+					{s.data.media.length > 0 ? `이미지·영상 ${s.data.media.length}개` : '이미지·영상 준비 중'}
+				</div>
+			</div>
+		</article>
+	))}
+</div>
+
+<script>
+	const q = document.querySelector<HTMLInputElement>('#s-q')!;
+	const typeSel = document.querySelector<HTMLSelectElement>('#s-type')!;
+	const chips = [...document.querySelectorAll<HTMLButtonElement>('#s-chips .chip')];
+	const cards = [...document.querySelectorAll<HTMLElement>('#s-grid .card')];
+	const empty = document.querySelector<HTMLElement>('#s-empty')!;
+	let status = '';
+	function apply() {
+		const text = q.value.trim().toLowerCase();
+		let shown = 0;
+		for (const c of cards) {
+			const ok =
+				(!status || c.dataset.status === status) &&
+				(!typeSel.value || c.dataset.type === typeSel.value) &&
+				(!text || c.dataset.text!.includes(text));
+			c.hidden = !ok;
+			if (ok) shown++;
+		}
+		empty.hidden = shown > 0;
+	}
+	q.addEventListener('input', apply);
+	typeSel.addEventListener('change', apply);
+	for (const b of chips) {
+		b.addEventListener('click', () => {
+			status = b.dataset.status ?? '';
+			chips.forEach((x) => x.classList.toggle('on', x === b));
+			apply();
+		});
+	}
+</script>

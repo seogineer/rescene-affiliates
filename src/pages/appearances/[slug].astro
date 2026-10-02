@@ -13,7 +13,7 @@ const { entry, media, latest, cover, tone } = Astro.props;
 const d = entry.data;
 ---
 <Base title={d.name} description={d.summary} image={cover ? ytThumb(cover) : undefined}>
-	<a class="back" href={url('appearances/')}>← 출연 목록</a>
+	<a class="back" href={url('#appearances')}>← 출연 목록</a>
 	<div class="detail-head has-cover">
 		<div>
 			<h1>{d.name}</h1>

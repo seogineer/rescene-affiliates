@@ -1,84 +1,22 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { url, newIssueUrl } from '../../config';
-import { getAppearances } from '../../lib/appearances';
-import { ytThumb } from '../../lib/youtube';
-import { APPEARANCE_CATEGORIES } from '../../content.config';
-const items = await getAppearances();
-// 데이터에 있는 종류만 칩으로 보여준다.
-const categories = APPEARANCE_CATEGORIES.filter((c) => items.some(({ entry }) => entry.data.category === c));
+// 출연 목록은 메인의 출연 탭으로 옮겼다. 예전 주소로 들어오면 그 탭으로 넘긴다.
+// GitHub Pages는 서버 리다이렉트가 없어서 meta refresh와 스크립트로 넘기고, 검색엔진 색인에서는 뺀다.
+import { url } from '../../config';
+const to = url('#appearances');
+const canonical = new URL(url(), Astro.site).href;
 ---
-<Base title="출연" description="리센느가 출연한 유튜브 채널·웹예능, TV 예능, 라디오, 음악방송을 팬들이 함께 기록합니다.">
-	<div class="sec-head">
-		<h2><small>Scenes on screen</small>출연</h2>
-		<p>최근 출연한 순서</p>
-	</div>
-	<div class="filters" role="search">
-		<input id="q" type="search" placeholder="프로그램·채널 검색" aria-label="출연 검색" />
-		<div class="chips" id="cat-chips">
-			<button type="button" class="chip on" data-cat="">전체</button>
-			{categories.map((c) => <button type="button" class="chip" data-cat={c}>{c}</button>)}
-		</div>
-	</div>
-	<p id="empty" class="meta" hidden>조건에 맞는 출연이 없습니다. <a href={newIssueUrl('new-appearance.yml')}>출연 제보하기</a></p>
-	<div class="grid" id="grid">
-		{items.map(({ entry: a, media, latest, cover, tone }) => (
-			<article class="card" data-cat={a.data.category} data-text={`${a.data.name} ${a.data.broadcaster ?? ''} ${a.data.summary}`.toLowerCase()}>
-				{cover ? (
-					<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /></div>
-				) : (
-					<div class={`cover blank tone-${tone}`}>{a.data.name.slice(0, 1)}</div>
-				)}
-				<div class="card-body">
-					<div class="badges">
-						<span class="badge">{a.data.category}</span>
-						{a.data.broadcaster && <span class="badge">{a.data.broadcaster}</span>}
-					</div>
-					<h3><a class="stretch" href={url(`appearances/${a.id}/`)}>{a.data.name}</a></h3>
-					<p>{a.data.summary}</p>
-					<div class="meta">
-						{latest && <>최근 {latest} · </>}
-						{media.length > 0 ? `영상 ${media.length}개` : '영상 준비 중'}
-					</div>
-				</div>
-			</article>
-		))}
-	</div>
-
-	<script>
-		const q = document.querySelector<HTMLInputElement>('#q')!;
-		const chips = [...document.querySelectorAll<HTMLButtonElement>('#cat-chips .chip')];
-		const cards = [...document.querySelectorAll<HTMLElement>('#grid .card')];
-		const empty = document.querySelector<HTMLElement>('#empty')!;
-		let cat = '';
-		function apply() {
-			const text = q.value.trim().toLowerCase();
-			let shown = 0;
-			for (const c of cards) {
-				const ok = (!cat || c.dataset.cat === cat) && (!text || c.dataset.text!.includes(text));
-				c.hidden = !ok;
-				if (ok) shown++;
-			}
-			empty.hidden = shown > 0;
-		}
-		q.addEventListener('input', apply);
-		for (const b of chips) {
-			b.addEventListener('click', () => {
-				cat = b.dataset.cat ?? '';
-				chips.forEach((x) => x.classList.toggle('on', x === b));
-				apply();
-			});
-		}
-	</script>
-
-	<section class="contribute">
-		<div>
-			<h2>함께 기록해 주세요</h2>
-			<p>빠진 출연이나 회차 영상이 있으면 제보해 주세요. 방송사·채널 공식 영상만 받습니다.</p>
-		</div>
-		<div class="actions">
-			<a class="btn" href={newIssueUrl('new-appearance.yml')}>출연 제보</a>
-			<a class="btn ghost" href={newIssueUrl('add-media.yml')}>영상 제보</a>
-		</div>
-	</section>
-</Base>
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="noindex" />
+		<link rel="canonical" href={canonical} />
+		<meta http-equiv="refresh" content={`0; url=${to}`} />
+		<title>출연 · 리센느 계열사</title>
+		<script is:inline define:vars={{ to }}>location.replace(to);</script>
+	</head>
+	<body>
+		<p><a href={to}>출연 목록으로 이동</a></p>
+	</body>
+</html>

@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
-import { url, newIssueUrl } from '../config';
+import SponsorList from '../components/SponsorList.astro';
+import AppearanceList from '../components/AppearanceList.astro';
+import { newIssueUrl } from '../config';
 import { getSponsors } from '../lib/sponsors';
 import { getAppearances } from '../lib/appearances';
 import { ytThumb, ytWatch } from '../lib/youtube';
@@ -9,8 +11,6 @@ import { HERO } from '../data/official';
 const items = await getSponsors();
 const appearances = await getAppearances();
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
-const statuses = ['진행중', '확인필요', '종료'].filter((st) => items.some(({ entry }) => entry.data.status === st));
-const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 ---
 <Base image={ytThumb(HERO.id, 'maxresdefault')}>
 	<section class="hero">
@@ -29,107 +29,37 @@ const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
 	</section>
 
-	<div class="sec-head">
-		<h2><small>Scenes with brands</small>함께한 기업</h2>
-		<p>최근 시작한 순서</p>
+	<!-- 탭은 주소 해시(#sponsors, #appearances)로 고른다. 패널 id는 해시와 달라서 브라우저가 패널로 건너뛰지 않는다. -->
+	<div class="tabs" id="tabs" role="tablist" aria-label="목록">
+		<a class="tab" role="tab" id="tab-sponsors" href="#sponsors" aria-controls="panel-sponsors" aria-selected="true">기업<b>{items.length}</b></a>
+		<a class="tab" role="tab" id="tab-appearances" href="#appearances" aria-controls="panel-appearances" aria-selected="false" tabindex="-1">출연<b>{appearances.length}</b></a>
 	</div>
-	<div class="filters" role="search">
-		<input id="q" type="search" placeholder="기업 이름·내용 검색" aria-label="기업 검색" />
-		<div class="chips" id="status-chips">
-			<button type="button" class="chip on" data-status="">전체</button>
-			{statuses.map((st) => <button type="button" class="chip" data-status={st}>{st}</button>)}
-		</div>
-		<select id="type" aria-label="후원 형태">
-			<option value="">모든 형태</option>
-			{types.map((t) => <option value={t}>{t}</option>)}
-		</select>
-	</div>
-	<p id="empty" class="meta" hidden>조건에 맞는 기업이 없습니다. <a href={newIssueUrl('new-sponsor.yml')}>기업 제보하기</a></p>
-	<div class="grid" id="grid">
-		{items.map(({ entry: s, scene, cover, tone }) => (
-			<article class="card" data-status={s.data.status} data-type={s.data.type} data-text={`${s.data.name} ${s.data.summary}`.toLowerCase()}>
-				{cover ? (
-					<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /><span class="scene-tag">SCENE {scene}</span></div>
-				) : (
-					<div class={`cover blank tone-${tone}`}>{s.data.name.slice(0, 1)}<span class="scene-tag">SCENE {scene}</span></div>
-				)}
-				<div class="card-body">
-					<div class="badges">
-						<span class={`badge ${s.data.status}`}>{s.data.status}</span>
-						<span class="badge">{s.data.type}</span>
-						{s.data.sample && <span class="badge sample">샘플</span>}
-					</div>
-					<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>
-					<p>{s.data.summary}</p>
-					<div class="meta">
-						{s.data.startDate && <>{s.data.startDate}~ · </>}
-						{s.data.media.length > 0 ? `이미지·영상 ${s.data.media.length}개` : '이미지·영상 준비 중'}
-					</div>
-				</div>
-			</article>
-		))}
-	</div>
+	<section id="panel-sponsors" role="tabpanel" aria-labelledby="tab-sponsors">
+		<SponsorList />
+	</section>
+	<section id="panel-appearances" role="tabpanel" aria-labelledby="tab-appearances" hidden>
+		<AppearanceList />
+	</section>
 
 	<script>
-		const q = document.querySelector<HTMLInputElement>('#q')!;
-		const typeSel = document.querySelector<HTMLSelectElement>('#type')!;
-		const chips = [...document.querySelectorAll<HTMLButtonElement>('#status-chips .chip')];
-		const cards = [...document.querySelectorAll<HTMLElement>('#grid .card')];
-		const empty = document.querySelector<HTMLElement>('#empty')!;
-		let status = '';
-		function apply() {
-			const text = q.value.trim().toLowerCase();
-			let shown = 0;
-			for (const c of cards) {
-				const ok =
-					(!status || c.dataset.status === status) &&
-					(!typeSel.value || c.dataset.type === typeSel.value) &&
-					(!text || c.dataset.text!.includes(text));
-				c.hidden = !ok;
-				if (ok) shown++;
+		import { TABS, tabFromHash } from '../lib/tabs';
+		const tabs = document.querySelector<HTMLElement>('#tabs')!;
+		function select(scroll: boolean) {
+			const active = tabFromHash(location.hash);
+			for (const t of TABS) {
+				const on = t === active;
+				const tab = document.querySelector<HTMLElement>(`#tab-${t}`)!;
+				tab.setAttribute('aria-selected', String(on));
+				tab.tabIndex = on ? 0 : -1;
+				document.querySelector<HTMLElement>(`#panel-${t}`)!.hidden = !on;
 			}
-			empty.hidden = shown > 0;
+			// 헤더 메뉴처럼 다른 곳에서 해시로 들어왔을 때, 탭이 화면 밖이면 탭 위치로 내려간다.
+			const top = tabs.getBoundingClientRect().top;
+			if (scroll && (top < 0 || top > innerHeight - 80)) tabs.scrollIntoView({ block: 'start', behavior: 'instant' });
 		}
-		q.addEventListener('input', apply);
-		typeSel.addEventListener('change', apply);
-		for (const b of chips) {
-			b.addEventListener('click', () => {
-				status = b.dataset.status ?? '';
-				chips.forEach((x) => x.classList.toggle('on', x === b));
-				apply();
-			});
-		}
+		addEventListener('hashchange', () => select(true));
+		select(location.hash !== '');
 	</script>
-
-	{appearances.length > 0 && (
-		<>
-			<div class="sec-head">
-				<h2><small>Scenes on screen</small>최근 출연</h2>
-				<p>유튜브·예능·라디오·음악방송</p>
-			</div>
-			<div class="grid">
-				{appearances.slice(0, 3).map(({ entry: a, media, latest, cover, tone }) => (
-					<article class="card">
-						{cover ? (
-							<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /></div>
-						) : (
-							<div class={`cover blank tone-${tone}`}>{a.data.name.slice(0, 1)}</div>
-						)}
-						<div class="card-body">
-							<div class="badges"><span class="badge">{a.data.category}</span></div>
-							<h3><a class="stretch" href={url(`appearances/${a.id}/`)}>{a.data.name}</a></h3>
-							<p>{a.data.summary}</p>
-							<div class="meta">
-								{latest && <>최근 {latest} · </>}
-								{media.length > 0 ? `영상 ${media.length}개` : '영상 준비 중'}
-							</div>
-						</div>
-					</article>
-				))}
-			</div>
-			<a class="more" href={url('appearances/')}>출연 전체 보기 →</a>
-		</>
-	)}
 
 	<section class="contribute">
 		<div>

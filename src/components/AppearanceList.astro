@@ -1,0 +1,67 @@
+---
+import { url, newIssueUrl } from '../config';
+import { getAppearances } from '../lib/appearances';
+import { ytThumb } from '../lib/youtube';
+import { APPEARANCE_CATEGORIES } from '../content.config';
+const items = await getAppearances();
+// 데이터에 있는 종류만 칩으로 보여준다.
+const categories = APPEARANCE_CATEGORIES.filter((c) => items.some(({ entry }) => entry.data.category === c));
+---
+<div class="filters" role="search">
+	<input id="a-q" type="search" placeholder="프로그램·채널 검색" aria-label="출연 검색" />
+	<div class="chips" id="a-chips">
+		<button type="button" class="chip on" data-cat="">전체</button>
+		{categories.map((c) => <button type="button" class="chip" data-cat={c}>{c}</button>)}
+	</div>
+</div>
+<p class="meta sort-note">최근 출연한 순서</p>
+<p id="a-empty" class="meta" hidden>조건에 맞는 출연이 없습니다. <a href={newIssueUrl('new-appearance.yml')}>출연 제보하기</a></p>
+<div class="grid" id="a-grid">
+	{items.map(({ entry: a, media, latest, cover, tone }) => (
+		<article class="card" data-cat={a.data.category} data-text={`${a.data.name} ${a.data.broadcaster ?? ''} ${a.data.summary}`.toLowerCase()}>
+			{cover ? (
+				<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /></div>
+			) : (
+				<div class={`cover blank tone-${tone}`}>{a.data.name.slice(0, 1)}</div>
+			)}
+			<div class="card-body">
+				<div class="badges">
+					<span class="badge">{a.data.category}</span>
+					{a.data.broadcaster && <span class="badge">{a.data.broadcaster}</span>}
+				</div>
+				<h3><a class="stretch" href={url(`appearances/${a.id}/`)}>{a.data.name}</a></h3>
+				<p>{a.data.summary}</p>
+				<div class="meta">
+					{latest && <>최근 {latest} · </>}
+					{media.length > 0 ? `영상 ${media.length}개` : '영상 준비 중'}
+				</div>
+			</div>
+		</article>
+	))}
+</div>
+
+<script>
+	const q = document.querySelector<HTMLInputElement>('#a-q')!;
+	const chips = [...document.querySelectorAll<HTMLButtonElement>('#a-chips .chip')];
+	const cards = [...document.querySelectorAll<HTMLElement>('#a-grid .card')];
+	const empty = document.querySelector<HTMLElement>('#a-empty')!;
+	let cat = '';
+	function apply() {
+		const text = q.value.trim().toLowerCase();
+		let shown = 0;
+		for (const c of cards) {
+			const ok = (!cat || c.dataset.cat === cat) && (!text || c.dataset.text!.includes(text));
+			c.hidden = !ok;
+			if (ok) shown++;
+		}
+		empty.hidden = shown > 0;
+	}
+	q.addEventListener('input', apply);
+	for (const b of chips) {
+		b.addEventListener('click', () => {
+			cat = b.dataset.cat ?? '';
+			chips.forEach((x) => x.classList.toggle('on', x === b));
+			apply();
+		});
+	}
+</script>
