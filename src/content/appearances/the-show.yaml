@@ -1,0 +1,13 @@
+name: "더쇼"
+summary: "SBS Life 음악방송. 2026년 7월 14일 리메이크 싱글 'Pretty Girl'로 데뷔 2년 만에 첫 음악방송 1위를 차지했다."
+category: 음악방송
+broadcaster: SBS Life
+sources:
+  - title: "리센느, \"최선을 다해 달릴 테니\"…'Pretty Girl'로 음악방송 첫 1위 (톱스타뉴스, 2026-07-15)"
+    url: https://www.topstarnews.net/news/articleView.html?idxno=16134909
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=lzYGfa9XTYI
+    title: "[THE SHOW CHOICE] Pretty Girl - RESCENE [THE SHOW] 260714 방송"
+    date: 2026-07-14

@@ -1,0 +1,19 @@
+name: "안녕하세요원이입니다잘부탁드립니다"
+summary: "솔파스튜디오가 제작하는 원이의 단독 웹예능 채널('안원잘부'). 2026년 2월 개설 후 7개월 만에 구독자 200만 명을 넘겼고, 미나미의 갸루 레슨 편 등 멤버들도 함께 출연한다."
+category: 유튜브·웹예능
+broadcaster: 솔파스튜디오
+website: https://www.youtube.com/@helloiamwoninicetomeetyou
+sources:
+  - title: "리센느 원이 유튜브 '안원잘부' 개설 7개월 만에 200만 구독자 돌파 [왓IS] (일간스포츠, 2026-09-06)"
+    url: https://isplus.com/article/view/isp202609060064
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=JYUilbw34Z0
+    title: "[추석 특집] 제나의 트로트 메들리"
+    date: 2026-09-18
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=heifaIjlSUc
+    title: "갸루의 자세에 대해서 배워보았습니다"
+    date: 2026-03-20

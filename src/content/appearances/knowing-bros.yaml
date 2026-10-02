@@ -1,0 +1,15 @@
+name: "아는 형님"
+summary: "JTBC 예능. 2026년 6월 20일 원이와 미나미가 출연해 '거제 야호' 밈의 탄생 비화와 갸루 포즈를 선보였다."
+category: TV 예능
+broadcaster: JTBC
+sources:
+  - title: "대세 흐름 탄 리센느 원이·미나미, '아는 형님' 출격 [공식] (머니투데이, 2026-06-04)"
+    url: https://www.mt.co.kr/entertainment/2026/06/04/2026060414107237205
+  - title: "'아형' 리센느 원이·미나미, 거침 없는 입담 \"숙소 무너질 것 같다\" [RE:TV] (뉴스1, 2026-06-21)"
+    url: https://www.news1.kr/entertain/broadcast-tv/6203376
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=P0LNFoDtf74
+    title: "💚안녕하세요원이입니다아형나왔습니다잘부탁드립니다💚 리센느(RESCENE) 원이 모아보기｜아는 형님｜JTBC 260620 방송"
+    date: 2026-06-20

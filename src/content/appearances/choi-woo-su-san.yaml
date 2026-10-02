@@ -1,0 +1,13 @@
+name: "최우수산"
+summary: "MBC 예능. 2026년 7월 12일 방송된 8회에 리브, 메이, 제나가 출연했다."
+category: TV 예능
+broadcaster: MBC
+sources:
+  - title: "제나, 리센느 꼰대 순위 밝혔다 \"1위 원이·2위 리브·3위 미나미\" [최우수산][종합] (스타뉴스, 2026-07-13)"
+    url: https://www.starnewskorea.com/broadcast-show/2026/07/13/2026071308141449548
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=R1aVvHSiZcE
+    title: "[최우수산] 리센느에 꼰대 순위가 있다는 막내 제나의 애환 🤣 | #리센느 #제나 #원이 MBC260712방송"
+    date: 2026-07-12

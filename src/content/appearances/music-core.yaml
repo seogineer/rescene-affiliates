@@ -20,6 +20,11 @@ media:
     date: 2026-07-18
   - kind: video
     platform: youtube
+    url: https://www.youtube.com/watch?v=mafe6aEH16k
+    title: "RESCENE (리센느) - Pretty Girl | Show! MusicCore | MBC260718방송"
+    date: 2026-07-18
+  - kind: video
+    platform: youtube
     url: https://www.youtube.com/watch?v=j4LlqGxOr2E
     title: "RESCENE (리센느) - Pretty Girl | Show! MusicCore | MBC260711방송"
     date: 2026-07-11

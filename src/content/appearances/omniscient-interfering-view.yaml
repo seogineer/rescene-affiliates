@@ -1,0 +1,30 @@
+name: "전지적 참견 시점"
+summary: "MBC 예능. 2026년 7월 11일 멤버 전원이 출연해 숙소 생활과 거제시 홍보대사 활동을 공개했고, 8월 8일에는 프로그램 최초 단독 게스트로 다시 출연했다."
+category: TV 예능
+broadcaster: MBC
+sources:
+  - title: "[단독]'대세' 리센느, '전참시' 뜬다..웹 예능 이어 지상파 예능까지 접수 '야호~!' (스타뉴스, 2026-06-18)"
+    url: https://v.daum.net/v/HdkfzGGhCI
+  - title: "리센느, '전참시' 최초 단독 게스트로 나선다 (뉴시스, 2026-08-06)"
+    url: https://www.newsis.com/view/NISX20260806_0003738384
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=pWTBJV0OrqU
+    title: "[전지적 참견 시점 선공개] 최초 단독 게스트, 리센느 야호⭐ 멤버 전원 유행어가 있는 리센느 역시 오이쉬에~, MBC 260808 방송"
+    date: 2026-08-08
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=adbzlafaesU
+    title: "[전참시] 한 번도 빛난 적 없었던 리센느의 향으로 온 세상을 물들여💗 | #리센느 #원이 #미나미 MBC260711방송"
+    date: 2026-07-11
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=tv8Br6yHRhc
+    title: "[전지적 참견 시점] 모든 것을 함께 공유하는 리센느 멤버들💖 스케줄 전 다 같이 분주하게 준비하기!, MBC 260711 방송"
+    date: 2026-07-11
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=p4ji9qNb6Q4
+    title: "【#TVPP】 거제시 홍보대사 리센느의 특별한 하루! 거제 야호-! ♥️| 전지적참견시점 | MBC 260711 방송"
+    date: 2026-07-11

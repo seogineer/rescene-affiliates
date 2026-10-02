@@ -1,0 +1,13 @@
+name: "인기가요"
+summary: "SBS 음악방송. 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 첫 주 무대에 올랐다."
+category: 음악방송
+broadcaster: SBS
+sources:
+  - title: "RESCENE, Successfully Wraps First Week of Music Show Promotions for 'Pretty Girl' Comeback (스포츠경향, 2026-07-13)"
+    url: https://sports.khan.co.kr/en/article/202607132235007/
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=cZmqrxABKqk
+    title: "Pretty Girl - RESCENE (리센느) | SBS 260712 방송"
+    date: 2026-07-12

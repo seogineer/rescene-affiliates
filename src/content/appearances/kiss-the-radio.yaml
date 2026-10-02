@@ -1,0 +1,18 @@
+name: "한해의 키스 더 라디오"
+summary: "KBS Cool FM 라디오. 2026년 7월 14일 '놀라운 초대석'에 출연해 'Pretty Girl' 라이브를 선보였다."
+category: 라디오
+broadcaster: KBS Cool FM
+sources:
+  - title: "[한해의 키스 더 라디오] 놀라운 초대석 with. RESCENE (리센느) (KBS CoolFM 공식 유튜브, 2026-07-14)"
+    url: https://www.youtube.com/watch?v=0P82T5cadNw
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=0P82T5cadNw
+    title: "[한해의 키스 더 라디오] 놀라운 초대석 with. RESCENE (리센느) | KBS 260714 방송"
+    date: 2026-07-14
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=eBy08cCTaHg
+    title: "쿨룩 LIVE ▷ RESCENE (리센느) 'Pretty Girl' / [한해의 키스 더 라디오] | KBS 260714 방송"
+    date: 2026-07-14

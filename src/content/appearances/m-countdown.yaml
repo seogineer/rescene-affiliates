@@ -1,0 +1,13 @@
+name: "엠카운트다운"
+summary: "Mnet 음악방송. 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 무대를 가장 먼저 선보였다."
+category: 음악방송
+broadcaster: Mnet
+sources:
+  - title: "RESCENE, Successfully Wraps First Week of Music Show Promotions for 'Pretty Girl' Comeback (스포츠경향, 2026-07-13)"
+    url: https://sports.khan.co.kr/en/article/202607132235007/
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=Esd-KkxROxA
+    title: "'COMEBACK' RESCENE (리센느) - Pretty Girl #엠카운트다운 EP.936 | Mnet 260709 방송"
+    date: 2026-07-09
