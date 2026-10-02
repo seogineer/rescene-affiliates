@@ -5,7 +5,7 @@
 리센느와 함께한 기업, 그리고 기업이 공개한 이미지·영상 링크를 팬들이 함께 기록하는 **비공식 팬 사이트**입니다.
 '계열사'는 소속사의 계열사가 아니라 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.
 
-**🔗 https://seogineer.github.io/rescene-affiliates/**
+**🔗 https://remine.fan**
 
 ## 함께 만들기
 누구나 고치거나 추가할 수 있어요. GitHub 계정이 필요합니다.
@@ -28,7 +28,7 @@ PR을 올리면 스키마 검사와 빌드가 자동으로 돌고, `main`에 합
 
 ```sh
 npm install
-npm run dev      # http://localhost:4321/rescene-affiliates/
+npm run dev      # http://localhost:4321/
 npm run build
 ```
 
