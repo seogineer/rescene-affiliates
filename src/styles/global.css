@@ -168,7 +168,7 @@ footer.site .foot-nav a:hover { color: var(--rose); }
 @media (max-width: 720px) {
 	body { font-size: 16px; }
 	a.brand small { display: none; }
-	header.site nav a:not(.cta, .sec-link) { display: none; }
+	header.site nav a:not(.cta) { display: none; }
 	header.site nav a { padding: 7px 10px; white-space: nowrap; }
 	a.brand b { white-space: nowrap; }
 	.hero { padding-top: 36px; }
