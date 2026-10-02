@@ -1,11 +1,9 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { toDateString } from './lib/dates';
 
-// YAML은 따옴표 없는 2025-01-01을 Date로, 2025를 숫자로 읽으므로 모두 받아 문자열로 통일한다.
-const dateStr = z
-	.union([z.string(), z.number(), z.date()])
-	.transform((v) => (v instanceof Date ? v.toISOString().slice(0, 10) : String(v)));
+const dateStr = z.union([z.string(), z.number(), z.date()]).transform(toDateString);
 
 // 출처는 필수. 나무위키처럼 근거 없는 내용은 받지 않는다.
 const sources = z

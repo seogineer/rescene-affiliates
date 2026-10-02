@@ -22,11 +22,13 @@ const d = entry.data;
 				{d.broadcaster && <span class="badge">{d.broadcaster}</span>}
 			</div>
 			<p class="desc">{d.summary}</p>
-			<div class="meta">
-				{latest && <>최근 출연 {latest}</>}
-				{latest && d.website && ' · '}
-				{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 페이지 ↗</a>}
-			</div>
+			{(latest || d.website) && (
+				<div class="meta">
+					{latest && <>최근 출연 {latest}</>}
+					{latest && d.website && ' · '}
+					{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 페이지 ↗</a>}
+				</div>
+			)}
 			<a class="edit" href={editUrl(entry.filePath!)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
 		</div>
 		{cover ? (

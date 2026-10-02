@@ -1,6 +1,6 @@
 # 편집 가이드
 
-이 사이트의 모든 내용은 `src/content/sponsors/` 아래 기업별(`src/content/sponsors/`), 출연 프로그램·채널별(`src/content/appearances/`) YAML 파일 하나씩으로 관리됩니다.
+이 사이트의 모든 내용은 YAML 파일로 관리됩니다. 기업은 `src/content/sponsors/`에 기업마다 하나씩, 출연은 `src/content/appearances/`에 프로그램·채널마다 하나씩 있습니다.
 
 ## 내용 수정하기
 1. 사이트의 각 문서에서 **✏️ 이 문서 편집**을 누르면 GitHub 편집 화면이 열립니다. (GitHub 로그인 필요)

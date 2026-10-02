@@ -1,6 +1,6 @@
 import { getCollection } from 'astro:content';
 import { youtubeId } from './youtube';
-import { latestDate, byDateDesc } from './dates';
+import { latestDate, byDateDesc, byLatestThenName } from './dates';
 
 /** 목록·상세·메인이 같은 순서(최근 출연일 먼저)를 쓰도록 한 곳에서 만든다. */
 export async function getAppearances() {
@@ -14,8 +14,6 @@ export async function getAppearances() {
 			.find(Boolean);
 		return { entry, media, latest: latestDate(media), cover: cover ?? null };
 	});
-	items.sort(
-		(a, b) => byDateDesc({ date: a.latest }, { date: b.latest }) || a.entry.data.name.localeCompare(b.entry.data.name, 'ko'),
-	);
+	items.sort((a, b) => byLatestThenName({ latest: a.latest, name: a.entry.data.name }, { latest: b.latest, name: b.entry.data.name }));
 	return items.map((item, i) => ({ ...item, tone: i % 3 }));
 }

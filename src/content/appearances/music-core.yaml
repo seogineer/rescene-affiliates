@@ -1,5 +1,5 @@
 name: "쇼! 음악중심"
-summary: "MBC 음악방송. 2024년 'LOVE ATTACK'부터 무대에 올랐고, 2026년 7월 25일 리메이크 싱글 'Pretty Girl'로 데뷔 후 첫 지상파 음악방송 1위를 차지했다."
+summary: "MBC 음악방송. 2024년 'LOVE ATTACK'부터 무대에 올랐고, 2026년 7월 25일에는 방송 무대에 오르지 않고도 리메이크 싱글 'Pretty Girl'로 데뷔 후 첫 지상파 음악방송 1위를 차지했다."
 category: 음악방송
 broadcaster: MBC
 website: https://program.imbc.com/musiccore
@@ -12,7 +12,6 @@ media:
     url: https://www.youtube.com/shorts/IFzXMlejUcg
     title: "[쇼! 음악중심] To. 리센느, 귀여워주셔서 감사합니다 #리센느 #RESCENE #shorts"
     orientation: portrait
-    date: 2026-07-21
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=4s5TkXahA8g

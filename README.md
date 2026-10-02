@@ -24,13 +24,14 @@
 3. **확인하지 못한 것은 `확인필요`** — 추측하지 않습니다.
 
 ## 기술
-[Astro](https://astro.build) 콘텐츠 컬렉션 + GitHub Pages. 기업 한 곳이 YAML 파일 하나이고, 형식은 `src/content.config.ts`의 스키마로 검사합니다.
-PR을 올리면 스키마 검사와 빌드가 자동으로 돌고, `main`에 합쳐지면 자동 배포됩니다.
+[Astro](https://astro.build) 콘텐츠 컬렉션 + GitHub Pages. 기업 한 곳(`src/content/sponsors/`), 출연 프로그램·채널 하나(`src/content/appearances/`)가 각각 YAML 파일 하나이고, 형식은 `src/content.config.ts`의 스키마로 검사합니다.
+PR을 올리면 테스트·스키마 검사·빌드가 자동으로 돌고, `main`에 합쳐지면 자동 배포됩니다.
 
 ```sh
 npm install
 npm run dev      # http://localhost:4321/
 npm run build
+npm test         # Node 22.18 이상
 ```
 
 ## 라이선스와 저작권
