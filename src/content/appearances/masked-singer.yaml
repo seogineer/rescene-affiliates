@@ -1,0 +1,13 @@
+name: "복면가왕"
+summary: "MBC 예능. 2025년 8월 3일 방송된 506회에 미나미가 '가방 꾸미기'로 출연해 정체를 공개했다."
+category: TV 예능
+broadcaster: MBC
+sources:
+  - title: "일본인 리센느 미나미, 외국인 최초 프로야구서 애국가 가창 \"보컬 레슨 받아\"(복면가왕) (2025-08-03)"
+    url: https://v.daum.net/v/20250803183105316
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=jt5dpJ1iVoM
+    title: "[복면가왕] '가방 꾸미기'의 정체는 리센느 미나미!, MBC 250803 방송"
+    date: 2025-08-03

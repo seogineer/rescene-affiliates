@@ -1,0 +1,13 @@
+name: "놀라운 토요일"
+summary: "tvN 예능. 2026년 8월 15일 방송된 430회에 원이, 리브, 제나가 출연했다."
+category: TV 예능
+broadcaster: tvN
+sources:
+  - title: "리센느 원이 \"엄마가 더 연예인 돼, 피부과 다녀갔다고 올라와\" (놀토) (네이트 연예, 2026-08-15)"
+    url: https://m.news.nate.com/view/20260815n11046
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=1h4v7pLBwm0
+    title: "[#간식게임] 눈이 부신 리센느를 숨김없이 보여줘✨ 대세 리센느와 함께한 여름 방학🏖️ #highlight#놀라운토요일 | amazingsaturday EP.430"
+    date: 2026-08-15

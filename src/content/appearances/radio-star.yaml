@@ -1,0 +1,20 @@
+name: "라디오스타"
+summary: "MBC 예능. 2026년 9월 16일 방송된 981회에 미나미가 출연했다. 데뷔 후 첫 단독 예능 출연이다."
+category: TV 예능
+broadcaster: MBC
+sources:
+  - title: "'라디오스타' 리센느 미나미, 멤버들 없이 첫 예능 홀로서기 [TV스포] (네이트 연예, 2026-09-16)"
+    url: https://m.news.nate.com/view/20260916n20611
+  - title: "리센느 미나미, '라디오스타' 첫 단독 예능에 TV-OTT 화제성 1위 (톱스타뉴스)"
+    url: https://www.topstarnews.net/news/articleView.html?idxno=16207221
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=Dh2G-cyiakU
+    title: "[라디오스타] 음원 차트 1위 기념💖 미나미의 리센느 노래 메들리🎶, MBC 260916 방송"
+    date: 2026-09-16
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=70sONxrItyU
+    title: "미나미 내가 낳을걸... 앞으로도 보여줄게 많은 미나미의 매력 어택💘 | #라디오스타 #미나미 MBC260916방송"
+    date: 2026-09-16

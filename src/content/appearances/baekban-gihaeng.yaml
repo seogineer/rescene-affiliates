@@ -1,0 +1,13 @@
+name: "식객 허영만의 백반기행"
+summary: "TV조선 예능. 2025년 12월 21일 방송된 327회에 원이와 메이가 출연해 원이의 고향 거제를 함께 여행했다."
+category: TV 예능
+broadcaster: TV조선
+sources:
+  - title: "리센느 원이 \"거제 출신 최초 걸그룹, 역사 썼다…현수막도 달려\" ('백반기행') [종합] (네이트 연예, 2025-12-21)"
+    url: https://m.news.nate.com/view/20251221n15157
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=qiEXl-TwNg4
+    title: "[#백반기행] 백반기행에 거제의 아이돌 리센느가 떴다! 하루에 요거트 하나로 버티는 원이, 메이?! (TV CHOSUN 251221 방송)"
+    date: 2025-12-21
