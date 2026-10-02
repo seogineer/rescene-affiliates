@@ -1,0 +1,35 @@
+name: "쇼! 음악중심"
+summary: "MBC 음악방송. 2024년 'LOVE ATTACK'부터 무대에 올랐고, 2026년 7월 25일 리메이크 싱글 'Pretty Girl'로 데뷔 후 첫 지상파 음악방송 1위를 차지했다."
+category: 음악방송
+broadcaster: MBC
+website: https://program.imbc.com/musiccore
+sources:
+  - title: "초등학교 운동회서 '음중' 1위…리센느의 '거북이 서사' (스포츠동아, 2026-07-26)"
+    url: https://m.news.nate.com/view/20260726n04198
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/shorts/IFzXMlejUcg
+    title: "[쇼! 음악중심] To. 리센느, 귀여워주셔서 감사합니다 #리센느 #RESCENE #shorts"
+    orientation: portrait
+    date: 2026-07-21
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=4s5TkXahA8g
+    title: "[#음중팔로우캠4K] RESCENE - Pretty Girl | 쇼! 음악중심 | MBC260718방송"
+    date: 2026-07-18
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=j4LlqGxOr2E
+    title: "RESCENE (리센느) - Pretty Girl | Show! MusicCore | MBC260711방송"
+    date: 2026-07-11
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=F9hbFUr-SmU
+    title: "RESCENE (리센느) - Runaway | Show! MusicCore | MBC260411방송"
+    date: 2026-04-11
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=KVffFcVRoyo
+    title: "RESCENE (리센느) - LOVE ATTACK | Show! MusicCore | MBC240907방송"
+    date: 2024-09-07
