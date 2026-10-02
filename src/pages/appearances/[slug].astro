@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import MediaCard from '../../components/MediaCard.astro';
+import { url, editUrl, newIssueUrl } from '../../config';
+import { getAppearances } from '../../lib/appearances';
+import { ytThumb } from '../../lib/youtube';
+
+export async function getStaticPaths() {
+	const items = await getAppearances();
+	return items.map((item) => ({ params: { slug: item.entry.id }, props: item }));
+}
+const { entry, media, latest, cover, tone } = Astro.props;
+const d = entry.data;
+---
+<Base title={d.name} description={d.summary} image={cover ? ytThumb(cover) : undefined}>
+	<a class="back" href={url('appearances/')}>← 출연 목록</a>
+	<div class="detail-head has-cover">
+		<div>
+			<h1>{d.name}</h1>
+			<div class="badges">
+				<span class="badge">{d.category}</span>
+				{d.broadcaster && <span class="badge">{d.broadcaster}</span>}
+			</div>
+			<p class="desc">{d.summary}</p>
+			<div class="meta">
+				{latest && <>최근 출연 {latest}</>}
+				{latest && d.website && ' · '}
+				{d.website && <a href={d.website} target="_blank" rel="noopener noreferrer">공식 페이지 ↗</a>}
+			</div>
+			<a class="edit" href={editUrl(entry.filePath!)} target="_blank" rel="noopener noreferrer">✏️ 이 문서 편집</a>
+		</div>
+		{cover ? (
+			<div class="cover"><img src={ytThumb(cover)} alt="" /></div>
+		) : (
+			<div class={`cover blank tone-${tone}`}>{d.name.slice(0, 1)}</div>
+		)}
+	</div>
+
+	<h2 class="sec">출연 영상</h2>
+	{media.length === 0 ? (
+		<p class="meta">아직 기록된 영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>영상 제보하기</a></p>
+	) : (
+		<div class="media-grid">{media.map((m) => <MediaCard {...m} />)}</div>
+	)}
+
+	<h2 class="sec">출처</h2>
+	<ol class="sources">
+		{d.sources.map((s) => <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></li>)}
+	</ol>
+</Base>
