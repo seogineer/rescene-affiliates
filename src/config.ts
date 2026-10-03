@@ -2,6 +2,9 @@ export const REPO = 'seogineer/rescene-affiliates';
 export const BRANCH = 'main';
 export const REPO_URL = `https://github.com/${REPO}`;
 
+/** 방문 수 집계(GoatCounter) 사이트 코드. 공개 주소에 그대로 들어가는 값이다. */
+export const GOATCOUNTER = 'remine';
+
 /** 사이트 내부 경로를 base(/rescene-affiliates)를 붙여 만든다. */
 export const url = (path = '') =>
 	`${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;

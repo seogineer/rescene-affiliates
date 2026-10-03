@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { url, REPO_URL, newIssueUrl } from '../config';
+import { url, REPO_URL, newIssueUrl, GOATCOUNTER } from '../config';
 interface Props { title?: string; description?: string; image?: string }
 const DEFAULT_DESC = '리센느와 함께한 기업과 기업이 공개한 이미지·영상을 팬들이 함께 기록하는 비공식 팬 위키';
 const { title, description = DEFAULT_DESC, image } = Astro.props;
@@ -28,6 +28,7 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		{image && <meta property="og:image" content={image} />}
+		{import.meta.env.PROD && <script is:inline async data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
 		<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 	</head>
 	<body>
@@ -55,7 +56,30 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 				팬이 만든 비공식 사이트이며 소속사·기업과 무관합니다.<br />
 				사진·영상은 공식 채널과 원본 게시물에서 불러오며, 저작권은 각 권리자에게 있습니다.<br />
 				마지막 배포 {updated}
+				<span id="visits" data-code={GOATCOUNTER} hidden></span>
 			</div>
 		</footer>
+		<script>
+			import { counterUrl, todayStart, parseCount, formatVisits } from '../lib/counter';
+			const el = document.querySelector<HTMLElement>('#visits')!;
+			// 404여도 본문에 0이 들어 있다(해당 기간에 기록이 없을 때). 숫자를 못 읽으면 null로 두고 줄을 숨긴다.
+			async function read(url: string) {
+				try {
+					const res = await fetch(url);
+					if (!res.ok && res.status !== 404) return null;
+					return parseCount((await res.json()).count);
+				} catch {
+					return null;
+				}
+			}
+			const code = el.dataset.code!;
+			const [today, total] = await Promise.all([read(counterUrl(code, todayStart(new Date()))), read(counterUrl(code))]);
+			const text = formatVisits(today, total);
+			if (text) {
+				el.textContent = ` · ${text}`;
+				if (today !== null) el.title = '매일 한국 시간 오전 9시에 \'오늘\' 숫자가 0으로 돌아갑니다';
+				el.hidden = false;
+			}
+		</script>
 	</body>
 </html>
