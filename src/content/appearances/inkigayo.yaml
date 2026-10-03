@@ -1,13 +1,32 @@
 name: "인기가요"
-summary: "SBS 음악방송. 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 첫 주 무대에 올랐다."
+summary: "SBS 음악방송. 2024년 'LOVE ATTACK' 무대에 올랐고, 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 첫 주 무대에도 올랐다. 7월 26일 'LOVE ATTACK'으로 인기가요 첫 1위를, 8월 16일 같은 곡으로 통산 두 번째 1위를 차지했다."
 category: 음악방송
 broadcaster: SBS
 sources:
   - title: "RESCENE, Successfully Wraps First Week of Music Show Promotions for 'Pretty Girl' Comeback (스포츠경향, 2026-07-13)"
     url: https://sports.khan.co.kr/en/article/202607132235007/
+  - title: "역주행 신드롬 완성! 리센느, '인가'서 'LOVE ATTACK' 첫 1위 (전자신문, 2026-07-27)"
+    url: https://www.etnews.com/20260727000018
+  - title: "리센느, 'LOVE ATTACK' 역주행·'Pretty Girl' 정주행…음방 6관왕 달성 (OSEN, 2026-08-17)"
+    url: https://m.news.nate.com/view/20260817n04390
 media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=v1C6hfjSNYk
+    title: "Deja Vu - RESCENE (리센느) | SBS 260726 방송"
+    date: 2026-07-26
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=hwHAlPnG0S4
+    title: "[단독샷캠4K] 리센느 'Pretty Girl' 단독샷 별도녹화│RESCENE ONE TAKE STAGE│@SBS Inkigayo 260712"
+    date: 2026-07-12
   - kind: video
     platform: youtube
     url: https://www.youtube.com/watch?v=cZmqrxABKqk
     title: "Pretty Girl - RESCENE (리센느) | SBS 260712 방송"
     date: 2026-07-12
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=Hv1wQ6nlpNE
+    title: "RESCENE (리센느) - LOVE ATTACK @인기가요 inkigayo 20240901"
+    date: 2024-09-01
