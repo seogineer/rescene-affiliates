@@ -1,0 +1,15 @@
+name: "2026 SPOTV K-POP AWARDS"
+summary: "2026년 9월 6일 일산 킨텍스에서 열린 K팝 시상식. 리센느는 '글로벌 커넥트'와 '스포티비 앰버서더' 부문을 수상해 2관왕을 차지했고, 수상 후 히트곡 메들리와 대표곡 무대를 선보였다."
+category: 행사·시상식
+broadcaster: SPOTV
+sources:
+  - title: "리센느, '2026 SKA'서 2관왕…'대세 걸그룹' 재증명 (스포티비뉴스, 2026-09-07)"
+    url: https://www.spotvnews.co.kr/news/articleView.html?idxno=1006123
+  - title: "[포토] 리센느, 스포티비 케이팝 시상식 참석 (아주경제, 2026-09-06)"
+    url: https://www.ajunews.com/view/20260906203851448
+media:
+  - kind: image
+    platform: web
+    url: https://www.ajunews.com/view/20260906203851448
+    title: "[포토] 리센느, 스포티비 케이팝 시상식 참석 (아주경제)"
+    date: 2026-09-06

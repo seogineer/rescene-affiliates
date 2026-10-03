@@ -2,6 +2,7 @@
 import { url, newIssueUrl } from '../config';
 import { getAppearances } from '../lib/appearances';
 import { ytThumb } from '../lib/youtube';
+import { mediaNoun } from '../lib/media';
 import { APPEARANCE_CATEGORIES } from '../content.config';
 const items = await getAppearances();
 // 데이터에 있는 종류만 칩으로 보여준다.
@@ -33,7 +34,7 @@ const categories = APPEARANCE_CATEGORIES.filter((c) => items.some(({ entry }) =>
 				<p>{a.data.summary}</p>
 				<div class="meta">
 					{latest && <>최근 {latest} · </>}
-					{media.length > 0 ? `영상 ${media.length}개` : '영상 준비 중'}
+					{media.length > 0 ? `${mediaNoun(media)} ${media.length}개` : '이미지·영상 준비 중'}
 				</div>
 			</div>
 		</article>

@@ -42,7 +42,7 @@ const sponsors = defineCollection({
 	}),
 });
 
-export const APPEARANCE_CATEGORIES = ['유튜브·웹예능', 'TV 예능', '라디오', '음악방송'] as const;
+export const APPEARANCE_CATEGORIES = ['유튜브·웹예능', 'TV 예능', '라디오', '음악방송', '행사·시상식'] as const;
 
 // 출연은 채널·프로그램 하나가 문서 하나이고, 출연 회차는 media에 담는다.
 const appearances = defineCollection({

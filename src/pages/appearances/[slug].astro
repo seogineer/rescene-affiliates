@@ -4,6 +4,7 @@ import MediaCard from '../../components/MediaCard.astro';
 import { url, editUrl, newIssueUrl } from '../../config';
 import { getAppearances } from '../../lib/appearances';
 import { ytThumb } from '../../lib/youtube';
+import { mediaNoun } from '../../lib/media';
 
 export async function getStaticPaths() {
 	const items = await getAppearances();
@@ -38,9 +39,9 @@ const d = entry.data;
 		)}
 	</div>
 
-	<h2 class="sec">출연 영상</h2>
+	<h2 class="sec">출연 {mediaNoun(media)}</h2>
 	{media.length === 0 ? (
-		<p class="meta">아직 기록된 영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>영상 제보하기</a></p>
+		<p class="meta">아직 기록된 이미지·영상이 없습니다. <a href={newIssueUrl('add-media.yml')}>이미지·영상 제보하기</a></p>
 	) : (
 		<div class="media-grid">{media.map((m) => <MediaCard {...m} />)}</div>
 	)}

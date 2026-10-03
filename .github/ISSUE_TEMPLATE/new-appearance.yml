@@ -1,5 +1,5 @@
 name: 출연 제보
-description: 리센느가 출연한 유튜브 채널·예능·라디오·음악방송을 제보합니다
+description: 리센느가 출연한 유튜브 채널·예능·라디오·음악방송·행사·시상식을 제보합니다
 title: "[출연] "
 labels: ["제보"]
 body:
@@ -11,11 +11,11 @@ body:
     id: category
     attributes:
       label: 종류
-      options: [유튜브·웹예능, TV 예능, 라디오, 음악방송]
+      options: [유튜브·웹예능, TV 예능, 라디오, 음악방송, 행사·시상식]
     validations: { required: true }
   - type: input
     id: broadcaster
-    attributes: { label: 방송사·채널, description: "예: MBC, KBS Kpop, 채널 이름" }
+    attributes: { label: 방송사·채널·주최, description: "예: MBC, KBS Kpop, 채널 이름, 행사 주최" }
   - type: textarea
     id: media
     attributes:

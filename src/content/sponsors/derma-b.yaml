@@ -1,0 +1,16 @@
+name: "더마비 (Derma:B)"
+summary: "네오팜의 바디 더마 브랜드. 그룹이 아니라 멤버 원이 개인을 브랜드 모델로 발탁했다. 2026년 10월 1일 브랜드 리뉴얼과 '데일리 세라마이드' 라인 출시를 발표하며 '더 나은 피부' 캠페인을 시작했다(시작일은 발표일 기준)."
+type: 광고모델
+status: 진행중
+startDate: 2026-10
+sources:
+  - title: "더마비, 보디 피부장벽 케어 브랜드로 새출발 (코스모닝, 2026-10-01)"
+    url: https://www.cosmorning.com/news/article.html?no=53627
+  - title: "더마비, '데일리 세라마이드'로 브랜드 새단장…리센느 원이 모델 발탁 (뉴스탭, 2026-10-02)"
+    url: https://www.newstap.co.kr/news/articleView.html?idxno=335142
+media:
+  - kind: video
+    platform: youtube
+    url: https://www.youtube.com/watch?v=AgPXJTqC4RI
+    title: "Body. Barrier. Better. - Derma:B, a Better you (30S)"
+    date: 2026-10-01
