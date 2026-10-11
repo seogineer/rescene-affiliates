@@ -9,6 +9,7 @@ import { ytThumb, ytWatch } from '../lib/youtube';
 import EventRow from '../components/EventRow.astro';
 import { splitSchedule, seoulToday } from '../lib/schedule';
 import { MEMBERS, MEMBER_SLUG } from '../lib/members';
+import { website } from '../lib/seo';
 import { HERO } from '../data/official';
 
 const items = await getSponsors();
@@ -19,11 +20,16 @@ const next = splitSchedule(
 ).upcoming.slice(0, 3);
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 ---
-<Base image={ytThumb(HERO.id, 'maxresdefault')}>
+<Base
+	image={ytThumb(HERO.id, 'maxresdefault')}
+	fullTitle="리센느(RESCENE) 팬 사이트 · 리마인(REMINE) 위키 - 광고·출연·일정 정리 | 리센느 계열사"
+	description="리센느(RESCENE)가 광고·협찬으로 함께한 기업, 출연한 예능·음악방송·라디오·유튜브와 행사 일정을 출처와 함께 정리한 리마인(REMINE) 팬 위키입니다."
+	jsonLd={[website(new URL(url(), Astro.site).href)]}
+>
 	<section class="hero">
 		<div class="eyebrow">Re : Scene with RESCENE</div>
 		<h1>리센느 <em>계열사</em></h1>
-		<p class="lead">리센느와 함께한 기업과 출연 프로그램, 그리고 공개된 이미지·영상을 팬들이 함께 기록합니다.</p>
+		<p class="lead">리센느(RESCENE)와 함께한 기업과 출연 프로그램, 그리고 공개된 이미지·영상을 리마인(REMINE)이 함께 기록합니다.</p>
 		<figure class="hero-photo">
 			<img src={ytThumb(HERO.id, 'maxresdefault')} alt="한복을 입은 리센느 멤버 다섯 명" />
 			<figcaption>사진 · <a href={ytWatch(HERO.id)} target="_blank" rel="noopener noreferrer">RESCENE 공식 유튜브 「{HERO.title}」</a></figcaption>

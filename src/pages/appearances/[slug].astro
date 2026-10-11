@@ -1,4 +1,5 @@
 ---
+import { breadcrumbs } from '../../lib/seo';
 import Base from '../../layouts/Base.astro';
 import MediaCard from '../../components/MediaCard.astro';
 import { url, editUrl, newIssueUrl } from '../../config';
@@ -13,8 +14,14 @@ export async function getStaticPaths() {
 }
 const { entry, media, latest, cover, tone } = Astro.props;
 const d = entry.data;
+const abs = (p = '') => new URL(url(p), Astro.site).href;
+const crumbs = breadcrumbs([
+	{ name: '리센느 계열사', url: abs() },
+	{ name: '출연', url: abs('#appearances') },
+	{ name: d.name, url: abs('appearances/' + entry.id + '/') },
+]);
 ---
-<Base title={d.name} description={d.summary} image={cover ? ytThumb(cover) : undefined}>
+<Base title={`리센느 ${d.name} 출연`} description={d.summary} jsonLd={[crumbs]} image={cover ? ytThumb(cover) : undefined}>
 	<a class="back" href={url('#appearances')}>← 출연 목록</a>
 	<div class="detail-head has-cover">
 		<div>
