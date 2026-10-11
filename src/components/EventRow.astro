@@ -1,0 +1,12 @@
+---
+import { url } from '../config';
+import { formatEvent } from '../lib/schedule';
+interface Props { id: string; name: string; category: string; eventDate: string; eventTime?: string; pending?: boolean }
+const { id, name, category, eventDate, eventTime, pending } = Astro.props;
+---
+<li class="event">
+	<time datetime={eventDate}>{formatEvent(eventDate, eventTime)}</time>
+	<a href={url(`appearances/${id}/`)}>{name}</a>
+	<span class="badge">{category}</span>
+	{pending && <span class="badge 확인필요">내용 확인필요</span>}
+</li>

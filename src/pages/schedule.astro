@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import EventRow from '../components/EventRow.astro';
+import { newIssueUrl } from '../config';
+import { getAppearances } from '../lib/appearances';
+import { splitSchedule, seoulToday } from '../lib/schedule';
+
+const items = (await getAppearances()).map(({ entry }) => ({
+	id: entry.id,
+	name: entry.data.name,
+	category: entry.data.category,
+	eventDate: entry.data.eventDate,
+	eventTime: entry.data.eventTime,
+	pending: entry.data.summary.includes('확인필요'),
+}));
+// 하루 한 번 다시 빌드해 다가오는 일정과 지난 일정을 가른다.
+const { upcoming, past } = splitSchedule(items, seoulToday());
+---
+<Base title="일정" description="리센느의 방송·행사·시상식 일정. 다가오는 일정과 지난 일정을 날짜순으로 모았습니다.">
+	<article class="prose wide">
+		<h1>일정</h1>
+		<p class="meta">출연 문서에 날짜가 적힌 방송·행사를 모았습니다. 날짜와 시각은 한국 시간이며, 일정은 바뀔 수 있어요. 공식 일정은 <a href="https://artist.mnetplus.world/main/stg/rescene-official/schedule" target="_blank" rel="noopener noreferrer">Mnet Plus</a>에서 확인하세요.</p>
+
+		<h2>다가오는 일정 <small class="count">{upcoming.length}</small></h2>
+		{upcoming.length === 0 ? <p class="meta">기록된 다가오는 일정이 없습니다.</p> : <ul class="events">{upcoming.map((e) => <EventRow {...e} eventDate={e.eventDate!} />)}</ul>}
+
+		<h2>지난 일정 <small class="count">{past.length}</small></h2>
+		<ul class="events">{past.map((e) => <EventRow {...e} eventDate={e.eventDate!} />)}</ul>
+
+		<p class="meta">빠진 일정이 있나요? <a href={newIssueUrl('new-appearance.yml')}>출연 제보</a>에 날짜와 출처를 남겨주세요.</p>
+	</article>
+</Base>

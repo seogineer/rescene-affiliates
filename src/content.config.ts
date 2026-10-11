@@ -52,6 +52,9 @@ const appearances = defineCollection({
 		summary: z.string(),
 		category: z.enum(APPEARANCE_CATEGORIES),
 		broadcaster: z.string().optional(), // 방송사나 채널 운영자
+		// 일정 페이지에 올릴 날짜(YYYY-MM-DD)와 시각(HH:MM, 한국 시간). 날짜가 없으면 일정에 나오지 않는다.
+		eventDate: dateStr.optional(),
+		eventTime: z.string().regex(/^\d{2}:\d{2}$/, 'HH:MM 형식').optional(),
 		website: z.url().optional(),
 		sources,
 		media,

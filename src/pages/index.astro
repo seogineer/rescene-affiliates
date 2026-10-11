@@ -2,14 +2,20 @@
 import Base from '../layouts/Base.astro';
 import SponsorList from '../components/SponsorList.astro';
 import AppearanceList from '../components/AppearanceList.astro';
-import { newIssueUrl } from '../config';
+import { url, newIssueUrl } from '../config';
 import { getSponsors } from '../lib/sponsors';
 import { getAppearances } from '../lib/appearances';
 import { ytThumb, ytWatch } from '../lib/youtube';
+import EventRow from '../components/EventRow.astro';
+import { splitSchedule, seoulToday } from '../lib/schedule';
 import { HERO } from '../data/official';
 
 const items = await getSponsors();
 const appearances = await getAppearances();
+const next = splitSchedule(
+	appearances.map(({ entry }) => ({ id: entry.id, name: entry.data.name, category: entry.data.category, eventDate: entry.data.eventDate, eventTime: entry.data.eventTime, pending: entry.data.summary.includes('확인필요') })),
+	seoulToday(),
+).upcoming.slice(0, 3);
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 ---
 <Base image={ytThumb(HERO.id, 'maxresdefault')}>
@@ -28,6 +34,13 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 		</div>
 		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
 	</section>
+
+	{next.length > 0 && (
+		<section class="upcoming" aria-labelledby="upcoming-h">
+			<div class="sec-line"><h2 id="upcoming-h">다가오는 일정</h2><a href={url('schedule/')}>전체 일정 →</a></div>
+			<ul class="events">{next.map((e) => <EventRow {...e} eventDate={e.eventDate!} />)}</ul>
+		</section>
+	)}
 
 	<!-- 탭은 주소 해시(#sponsors, #appearances)로 고른다. 패널 id는 해시와 달라서 브라우저가 패널로 건너뛰지 않는다. -->
 	<div class="tabs" id="tabs" role="tablist" aria-label="목록">

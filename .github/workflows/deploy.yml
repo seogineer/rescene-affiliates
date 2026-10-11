@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # 한국 시간 매일 00:05에 다시 빌드해 일정의 '다가오는/지난'을 갱신한다.
+  schedule:
+    - cron: '5 15 * * *'
 
 permissions:
   contents: read
@@ -19,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 업데이트 기록이 git 로그를 읽는다
       - uses: withastro/action@v3
         with:
           node-version: 24

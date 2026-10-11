@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPO_URL } from '../config';
+import { getChanges } from '../lib/changelog';
+const changes = getChanges();
+---
+<Base title="업데이트 기록" description="리센느 계열사에 어떤 내용이 언제 추가·수정됐는지 변경 내역을 모았습니다.">
+	<article class="prose wide">
+		<h1>업데이트 기록</h1>
+		<p class="meta">저장소의 변경 기록을 배포할 때마다 자동으로 가져옵니다.</p>
+		{changes.length === 0 ? (
+			<p class="meta">변경 기록을 불러오지 못했습니다. <a href={`${REPO_URL}/commits/main`}>GitHub에서 보기</a></p>
+		) : (
+			<ul class="events log">
+				{changes.map((c) => (
+					<li class="event">
+						<time datetime={c.date}>{c.date}</time>
+						<a href={`${REPO_URL}/commit/${c.hash}`} target="_blank" rel="noopener noreferrer">{c.subject}</a>
+					</li>
+				))}
+			</ul>
+		)}
+	</article>
+</Base>

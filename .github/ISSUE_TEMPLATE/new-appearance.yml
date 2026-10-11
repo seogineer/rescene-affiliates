@@ -16,6 +16,9 @@ body:
   - type: input
     id: broadcaster
     attributes: { label: 방송사·채널·주최, description: "예: MBC, KBS Kpop, 채널 이름, 행사 주최" }
+  - type: input
+    id: date
+    attributes: { label: 날짜·시각, description: "일정에 올릴 수 있게 알려주세요. 예: 2026-10-11 16:10" }
   - type: textarea
     id: media
     attributes:

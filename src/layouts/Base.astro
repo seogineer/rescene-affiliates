@@ -36,6 +36,7 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 			<div class="wrap">
 				<a class="brand" href={url()}><b>리센느 계열사</b><small>for REMINE</small></a>
 				<nav>
+					<a href={url('schedule/')}>일정</a>
 					<a href={url('about/')}>소개</a>
 					<a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>편집 가이드</a>
 					<a href={REPO_URL}>GitHub</a>
@@ -48,7 +49,10 @@ const full = title ? `${title} · 리센느 계열사` : '리센느 계열사 ·
 			<div class="wrap">
 				<span class="remine">Re : Scene, for REMINE</span>
 				<nav class="foot-nav">
+					<a href={url('schedule/')}>일정</a>
 					<a href={url('about/')}>소개</a>
+					<a href={url('faq/')}>자주 묻는 질문</a>
+					<a href={url('changelog/')}>업데이트 기록</a>
 					<a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>편집 가이드</a>
 					<a href={newIssueUrl('correction.yml')}>정정·삭제 요청</a>
 					<a href={REPO_URL}>GitHub</a>
