@@ -215,3 +215,9 @@ a.badge.member:hover { background: var(--rose); border-color: var(--rose); }
 .member-nav { align-items: center; margin: 14px 0 0; }
 .member-nav .chip { text-decoration: none; }
 .hero .member-nav { margin: 18px 0 0; }
+
+/* global search */
+.gsearch { margin: 22px 0 0; max-width: 520px; }
+.gsearch input { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 12px 20px; }
+.gsearch input:focus { outline: 2px solid var(--rose); outline-offset: 1px; }
+.gsearch .events { margin-top: 10px; }

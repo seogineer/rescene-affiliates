@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import EventRow from '../components/EventRow.astro';
-import { newIssueUrl } from '../config';
+import { url, newIssueUrl } from '../config';
 import { getAppearances } from '../lib/appearances';
 import { splitSchedule, seoulToday } from '../lib/schedule';
 
@@ -20,6 +20,8 @@ const { upcoming, past } = splitSchedule(items, seoulToday());
 	<article class="prose wide">
 		<h1>일정</h1>
 		<p class="meta">출연 문서에 날짜가 적힌 방송·행사를 모았습니다. 날짜와 시각은 한국 시간이며, 일정은 바뀔 수 있어요. 공식 일정은 <a href="https://artist.mnetplus.world/main/stg/rescene-official/schedule" target="_blank" rel="noopener noreferrer">Mnet Plus</a>에서 확인하세요.</p>
+
+		<p class="meta">📅 <a href={url('schedule.ics')}>캘린더 구독(.ics)</a> — 구글·애플 캘린더에 이 주소를 'URL로 추가'하면 일정이 자동으로 따라옵니다.</p>
 
 		<h2>다가오는 일정 <small class="count">{upcoming.length}</small></h2>
 		{upcoming.length === 0 ? <p class="meta">기록된 다가오는 일정이 없습니다.</p> : <ul class="events">{upcoming.map((e) => <EventRow {...e} eventDate={e.eventDate!} />)}</ul>}

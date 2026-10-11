@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { editUrl, newIssueUrl } from '../config';
+import { getSponsors } from '../lib/sponsors';
+import { getAppearances } from '../lib/appearances';
+import { splitPending } from '../lib/maintenance';
+import { seoulToday, formatEvent } from '../lib/schedule';
+
+const docs = [
+	...(await getSponsors()).map(({ entry: e }) => ({ kind: '기업', id: e.id, name: e.data.name, path: e.filePath!, summary: e.data.summary, status: e.data.status, eventDate: undefined as string | undefined, eventTime: undefined as string | undefined })),
+	...(await getAppearances()).map(({ entry: e }) => ({ kind: '출연', id: e.id, name: e.data.name, path: e.filePath!, summary: e.data.summary, status: undefined, eventDate: e.data.eventDate, eventTime: e.data.eventTime })),
+];
+const { overdue, waiting } = splitPending(docs, seoulToday());
+overdue.sort((a, b) => a.eventDate!.localeCompare(b.eventDate!));
+---
+<Base title="갱신이 필요한 문서" description="'확인필요'로 표시된 문서와, 일정이 지났는데도 아직 갱신되지 않은 문서를 모았습니다.">
+	<article class="prose wide">
+		<h1>갱신이 필요한 문서</h1>
+		<p class="meta">'확인필요'로 표시된 문서입니다. 방송·행사 후 기사나 공식 공지가 나오면 ✏️ 편집으로 내용을 고치고 '확인필요'를 지워주세요. 출처를 함께 적어야 합니다.</p>
+
+		<h2>일정이 지났어요 <small class="count">{overdue.length}</small></h2>
+		{overdue.length === 0 ? <p class="meta">없습니다. 👏</p> : (
+			<ul class="events">{overdue.map((d) => (
+				<li class="event">
+					<time datetime={d.eventDate}>{formatEvent(d.eventDate!, d.eventTime)}</time>
+					<a href={editUrl(d.path)} target="_blank" rel="noopener noreferrer">✏️ {d.name}</a>
+					<span class="badge">{d.kind}</span>
+				</li>
+			))}</ul>
+		)}
+
+		<h2>열리기 전이거나 날짜가 없어요 <small class="count">{waiting.length}</small></h2>
+		{waiting.length === 0 ? <p class="meta">없습니다.</p> : (
+			<ul class="events">{waiting.map((d) => (
+				<li class="event">
+					<time datetime={d.eventDate}>{d.eventDate ? formatEvent(d.eventDate, d.eventTime) : '날짜 없음'}</time>
+					<a href={editUrl(d.path)} target="_blank" rel="noopener noreferrer">✏️ {d.name}</a>
+					<span class="badge">{d.kind}</span>
+				</li>
+			))}</ul>
+		)}
+		<p class="meta">고칠 내용을 GitHub에서 직접 쓰기 어렵다면 <a href={newIssueUrl('correction.yml')}>정정 요청</a>으로 알려주세요.</p>
+	</article>
+</Base>

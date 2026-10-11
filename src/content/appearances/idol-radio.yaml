@@ -1,5 +1,6 @@
 name: "아이돌 라디오"
 summary: "MBC 라디오. 2026년 7월 15일 시즌4 238회에 리센느가 출연했다."
+aliases: ["아이돌라디오", "아라"]
 category: 라디오
 broadcaster: MBC
 sources:

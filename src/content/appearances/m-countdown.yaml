@@ -1,5 +1,6 @@
 name: "엠카운트다운"
 summary: "Mnet 음악방송. 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 무대를 가장 먼저 선보였다."
+aliases: ["m countdown", "mcountdown", "엠카", "엠넷"]
 category: 음악방송
 broadcaster: Mnet
 sources:

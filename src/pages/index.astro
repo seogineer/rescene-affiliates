@@ -10,6 +10,7 @@ import EventRow from '../components/EventRow.astro';
 import { splitSchedule, seoulToday } from '../lib/schedule';
 import { MEMBERS, MEMBER_SLUG } from '../lib/members';
 import { website } from '../lib/seo';
+import { MEMBER_ALIASES } from '../lib/search';
 import { HERO } from '../data/official';
 
 const items = await getSponsors();
@@ -18,6 +19,11 @@ const next = splitSchedule(
 	appearances.map(({ entry }) => ({ id: entry.id, name: entry.data.name, category: entry.data.category, eventDate: entry.data.eventDate, eventTime: entry.data.eventTime, pending: entry.data.summary.includes('확인필요') })),
 	seoulToday(),
 ).upcoming.slice(0, 3);
+// 통합 검색용 색인. 멤버가 적힌 문서는 영문 이름으로도 찾는다.
+const searchIndex = [
+	...items.map(({ entry: e }) => ({ name: e.data.name, kind: '기업', url: url(`sponsors/${e.id}/`), text: `${e.data.members.join(' ')} ${e.data.summary}`, aliases: [...e.data.aliases, ...e.data.members.map((m) => MEMBER_ALIASES[m])].join(' ') })),
+	...appearances.map(({ entry: e }) => ({ name: e.data.name, kind: '출연', url: url(`appearances/${e.id}/`), text: `${e.data.broadcaster ?? ''} ${e.data.members.join(' ')} ${e.data.summary}`, aliases: [...e.data.aliases, ...e.data.members.map((m) => MEMBER_ALIASES[m])].join(' ') })),
+];
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 ---
 <Base
@@ -38,6 +44,11 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 			<div class="stat"><b>{items.length}</b><span>함께한 기업</span></div>
 			<div class="stat"><b>{activeCount}</b><span>진행 중</span></div>
 			<div class="stat"><b>{appearances.length}</b><span>출연</span></div>
+		</div>
+		<div class="gsearch" role="search">
+			<input id="g-q" type="search" placeholder="기업·프로그램·행사 검색 (예: 인기가요, ㅇㄱㄱㅇ, mlb)" aria-label="통합 검색" autocomplete="off" />
+			<ul id="g-results" class="events" hidden></ul>
+			<script id="g-data" type="application/json" set:html={JSON.stringify(searchIndex).replace(/</g, '\\u003c')}></script>
 		</div>
 		<nav class="chips member-nav" aria-label="멤버별 보기"><span class="meta">멤버별 보기</span>{MEMBERS.map((m) => <a class="chip" href={url(`members/${MEMBER_SLUG[m]}/`)}>{m}</a>)}</nav>
 		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
@@ -61,6 +72,37 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 	<section id="panel-appearances" role="tabpanel" aria-labelledby="tab-appearances" hidden>
 		<AppearanceList />
 	</section>
+
+	<script>
+		import { search, type Entry } from '../lib/search';
+		const gq = document.querySelector<HTMLInputElement>('#g-q')!;
+		const gres = document.querySelector<HTMLUListElement>('#g-results')!;
+		const data: Entry[] = JSON.parse(document.querySelector('#g-data')!.textContent!);
+		gq.addEventListener('input', () => {
+			const found = search(gq.value, data);
+			gres.replaceChildren(
+				...found.map((e) => {
+					const li = document.createElement('li');
+					li.className = 'event';
+					const a = document.createElement('a');
+					a.href = e.url;
+					a.textContent = e.name;
+					const b = document.createElement('span');
+					b.className = 'badge';
+					b.textContent = e.kind;
+					li.append(a, b);
+					return li;
+				}),
+			);
+			if (gq.value.trim() && found.length === 0) {
+				const li = document.createElement('li');
+				li.className = 'meta';
+				li.textContent = '검색 결과가 없습니다.';
+				gres.replaceChildren(li);
+			}
+			gres.hidden = !gq.value.trim();
+		});
+	</script>
 
 	<script>
 		import { TABS, tabFromHash } from '../lib/tabs';

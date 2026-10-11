@@ -1,5 +1,6 @@
 name: "뮤직뱅크"
 summary: "KBS2 음악방송. 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 첫 주 무대에 올랐다."
+aliases: ["music bank", "뮤뱅", "kbs 뮤직뱅크"]
 category: 음악방송
 broadcaster: KBS2
 sources:

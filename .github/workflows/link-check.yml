@@ -1,0 +1,38 @@
+name: Link check
+
+on:
+  schedule:
+    - cron: '0 18 * * 0' # 매주 월요일 03:00 (한국 시간)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check links
+        id: check
+        run: |
+          set +e
+          node scripts/check-links.mjs | tee report.txt
+          echo "broken=$?" >> "$GITHUB_OUTPUT"
+      - name: Open or update issue
+        if: steps.check.outputs.broken == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$(printf '주간 링크 점검에서 깨진 링크가 나왔어요. 출처를 새 주소로 바꾸거나 다른 기사로 교체해 주세요.\n\n```\n%s\n```\n' "$(cat report.txt)")"
+          gh label create '링크 점검' --color D93F0B --description '주간 링크 점검 결과' 2>/dev/null || true
+          number="$(gh issue list --label '링크 점검' --state open --json number --jq '.[0].number')"
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body "$body"
+          else
+            gh issue create --title '깨진 링크 점검 결과' --label '링크 점검' --body "$body"
+          fi

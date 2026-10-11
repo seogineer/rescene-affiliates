@@ -29,6 +29,9 @@ const media = z
 // 특정 멤버만 해당할 때만 적는다. 비워 두면 그룹 전체로 본다.
 const members = z.array(z.enum(MEMBERS)).default([]);
 
+// 검색에서만 쓰는 다른 이름(약칭·영문·초성 검색용 표기).
+const aliases = z.array(z.string()).default([]);
+
 const sponsors = defineCollection({
 	loader: glob({ pattern: '**/*.yaml', base: './src/content/sponsors' }),
 	schema: z.object({
@@ -37,6 +40,7 @@ const sponsors = defineCollection({
 		sample: z.boolean().default(false),
 		summary: z.string(),
 		members,
+		aliases,
 		type: z.enum(['광고모델', '앰버서더', '협찬', '콜라보', '스폰서십', '기타']),
 		status: z.enum(['진행중', '종료', '확인필요']),
 		startDate: dateStr.optional(), // YYYY-MM 또는 YYYY-MM-DD
@@ -56,6 +60,7 @@ const appearances = defineCollection({
 		name: z.string(),
 		summary: z.string(),
 		members,
+		aliases,
 		category: z.enum(APPEARANCE_CATEGORIES),
 		broadcaster: z.string().optional(), // 방송사나 채널 운영자
 		// 일정 페이지에 올릴 날짜(YYYY-MM-DD)와 시각(HH:MM, 한국 시간). 날짜가 없으면 일정에 나오지 않는다.

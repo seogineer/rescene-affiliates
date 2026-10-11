@@ -1,5 +1,6 @@
 name: "인기가요"
 summary: "SBS 음악방송. 2024년 'LOVE ATTACK' 무대에 올랐고, 2026년 7월 리메이크 싱글 'Pretty Girl' 컴백 첫 주 무대에도 올랐다. 7월 26일 'LOVE ATTACK'으로 인기가요 첫 1위를, 8월 16일 같은 곡으로 통산 두 번째 1위를 차지했다."
+aliases: ["inkigayo", "인가", "sbs 인기가요"]
 category: 음악방송
 broadcaster: SBS
 sources:
