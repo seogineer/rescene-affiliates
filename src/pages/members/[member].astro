@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import MemberBadges from '../../components/MemberBadges.astro';
+import { url } from '../../config';
+import { getSponsors } from '../../lib/sponsors';
+import { getAppearances } from '../../lib/appearances';
+import { MEMBERS, MEMBER_SLUG, forMember } from '../../lib/members';
+
+export async function getStaticPaths() {
+	const sponsors = (await getSponsors()).map((s) => ({ ...s, members: s.entry.data.members }));
+	const appearances = (await getAppearances()).map((a) => ({ ...a, members: a.entry.data.members }));
+	return MEMBERS.map((member) => ({
+		params: { member: MEMBER_SLUG[member] },
+		props: { member, sponsors: forMember(sponsors, member), appearances: forMember(appearances, member) },
+	}));
+}
+const { member, sponsors, appearances } = Astro.props;
+---
+<Base title={`${member}`} description={`리센느 ${member}가 개인으로 함께한 기업과 출연을 모았습니다.`}>
+	<a class="back" href={url()}>← 처음으로</a>
+	<article class="prose wide">
+		<h1>{member}</h1>
+		<p class="meta">{member}가 개인 또는 일부 멤버로 함께한 기업과 출연입니다. 그룹 전체가 함께한 것은 <a href={url()}>전체 목록</a>에서 볼 수 있어요. 문서에 멤버가 적힌 경우만 모으므로 빠진 것이 있으면 <a href={url('faq/')}>편집·제보</a>해 주세요.</p>
+
+		<nav class="chips member-nav" aria-label="멤버">
+			{MEMBERS.map((m) => <a class={`chip${m === member ? ' on' : ''}`} href={url(`members/${MEMBER_SLUG[m]}/`)}>{m}</a>)}
+		</nav>
+
+		<h2>기업 <small class="count">{sponsors.length}</small></h2>
+		{sponsors.length === 0 ? <p class="meta">아직 기록이 없습니다.</p> : (
+			<ul class="events">{sponsors.map(({ entry }) => (
+				<li class="event">
+					<a href={url(`sponsors/${entry.id}/`)}>{entry.data.name}</a>
+					<span class="badge">{entry.data.type}</span>
+					<span class={`badge ${entry.data.status}`}>{entry.data.status}</span>
+					<MemberBadges members={entry.data.members} />
+				</li>
+			))}</ul>
+		)}
+
+		<h2>출연 <small class="count">{appearances.length}</small></h2>
+		{appearances.length === 0 ? <p class="meta">아직 기록이 없습니다.</p> : (
+			<ul class="events">{appearances.map(({ entry, latest }) => (
+				<li class="event">
+					<a href={url(`appearances/${entry.id}/`)}>{entry.data.name}</a>
+					<span class="badge">{entry.data.category}</span>
+					<MemberBadges members={entry.data.members} />
+					{latest && <span class="meta">최근 {latest}</span>}
+				</li>
+			))}</ul>
+		)}
+	</article>
+</Base>

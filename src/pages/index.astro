@@ -8,6 +8,7 @@ import { getAppearances } from '../lib/appearances';
 import { ytThumb, ytWatch } from '../lib/youtube';
 import EventRow from '../components/EventRow.astro';
 import { splitSchedule, seoulToday } from '../lib/schedule';
+import { MEMBERS, MEMBER_SLUG } from '../lib/members';
 import { HERO } from '../data/official';
 
 const items = await getSponsors();
@@ -32,6 +33,7 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 			<div class="stat"><b>{activeCount}</b><span>진행 중</span></div>
 			<div class="stat"><b>{appearances.length}</b><span>출연</span></div>
 		</div>
+		<nav class="chips member-nav" aria-label="멤버별 보기"><span class="meta">멤버별 보기</span>{MEMBERS.map((m) => <a class="chip" href={url(`members/${MEMBER_SLUG[m]}/`)}>{m}</a>)}</nav>
 		<p class="note">※ '계열사'는 소속사 계열사가 아니라, 리센느와 함께한 기업을 부르는 팬들의 애칭입니다.</p>
 	</section>
 

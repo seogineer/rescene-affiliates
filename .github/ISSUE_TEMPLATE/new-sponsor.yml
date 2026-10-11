@@ -16,6 +16,17 @@ body:
   - type: input
     id: period
     attributes: { label: 기간, description: "예: 2025-03 ~ 진행중" }
+  - type: checkboxes
+    id: members
+    attributes:
+      label: 해당 멤버
+      description: 그룹 전체면 비워 두세요. 특정 멤버만 해당할 때만 고릅니다.
+      options:
+        - label: 원이
+        - label: 미나미
+        - label: 리브
+        - label: 메이
+        - label: 제나
   - type: textarea
     id: source
     attributes:

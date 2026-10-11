@@ -5,6 +5,7 @@ import { url, editUrl, newIssueUrl } from '../../config';
 import { getAppearances } from '../../lib/appearances';
 import { ytThumb } from '../../lib/youtube';
 import { mediaNoun } from '../../lib/media';
+import MemberBadges from '../../components/MemberBadges.astro';
 
 export async function getStaticPaths() {
 	const items = await getAppearances();
@@ -21,6 +22,7 @@ const d = entry.data;
 			<div class="badges">
 				<span class="badge">{d.category}</span>
 				{d.broadcaster && <span class="badge">{d.broadcaster}</span>}
+				<MemberBadges members={d.members} link />
 			</div>
 			<p class="desc">{d.summary}</p>
 			{(latest || d.website) && (

@@ -3,6 +3,7 @@ import { url, newIssueUrl } from '../config';
 import { getAppearances } from '../lib/appearances';
 import { ytThumb } from '../lib/youtube';
 import { mediaNoun } from '../lib/media';
+import MemberBadges from './MemberBadges.astro';
 import { APPEARANCE_CATEGORIES } from '../content.config';
 const items = await getAppearances();
 // 데이터에 있는 종류만 칩으로 보여준다.
@@ -19,7 +20,7 @@ const categories = APPEARANCE_CATEGORIES.filter((c) => items.some(({ entry }) =>
 <p id="a-empty" class="meta" hidden>조건에 맞는 출연이 없습니다. <a href={newIssueUrl('new-appearance.yml')}>출연 제보하기</a></p>
 <div class="grid" id="a-grid">
 	{items.map(({ entry: a, media, latest, cover, tone }) => (
-		<article class="card" data-cat={a.data.category} data-text={`${a.data.name} ${a.data.broadcaster ?? ''} ${a.data.summary}`.toLowerCase()}>
+		<article class="card" data-cat={a.data.category} data-text={`${a.data.name} ${a.data.broadcaster ?? ''} ${a.data.members.join(' ')} ${a.data.summary}`.toLowerCase()}>
 			{cover ? (
 				<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /></div>
 			) : (
@@ -29,6 +30,7 @@ const categories = APPEARANCE_CATEGORIES.filter((c) => items.some(({ entry }) =>
 				<div class="badges">
 					<span class="badge">{a.data.category}</span>
 					{a.data.broadcaster && <span class="badge">{a.data.broadcaster}</span>}
+					<MemberBadges members={a.data.members} />
 				</div>
 				<h3><a class="stretch" href={url(`appearances/${a.id}/`)}>{a.data.name}</a></h3>
 				<p>{a.data.summary}</p>

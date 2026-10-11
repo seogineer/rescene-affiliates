@@ -1,0 +1,9 @@
+---
+import { url } from '../config';
+import { MEMBER_SLUG, type Member } from '../lib/members';
+interface Props { members: readonly Member[]; link?: boolean }
+const { members, link = false } = Astro.props;
+---
+{members.map((m) => link
+	? <a class="badge member" href={url(`members/${MEMBER_SLUG[m]}/`)}>{m}</a>
+	: <span class="badge member">{m}</span>)}

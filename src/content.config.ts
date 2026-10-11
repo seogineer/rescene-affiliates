@@ -2,6 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { toDateString } from './lib/dates';
+import { MEMBERS } from './lib/members';
 
 const dateStr = z.union([z.string(), z.number(), z.date()]).transform(toDateString);
 
@@ -25,6 +26,9 @@ const media = z
 	)
 	.default([]);
 
+// 특정 멤버만 해당할 때만 적는다. 비워 두면 그룹 전체로 본다.
+const members = z.array(z.enum(MEMBERS)).default([]);
+
 const sponsors = defineCollection({
 	loader: glob({ pattern: '**/*.yaml', base: './src/content/sponsors' }),
 	schema: z.object({
@@ -32,6 +36,7 @@ const sponsors = defineCollection({
 		// true면 예시 데이터. 실제 자료를 넣을 때는 이 줄을 지운다.
 		sample: z.boolean().default(false),
 		summary: z.string(),
+		members,
 		type: z.enum(['광고모델', '앰버서더', '협찬', '콜라보', '스폰서십', '기타']),
 		status: z.enum(['진행중', '종료', '확인필요']),
 		startDate: dateStr.optional(), // YYYY-MM 또는 YYYY-MM-DD
@@ -50,6 +55,7 @@ const appearances = defineCollection({
 	schema: z.object({
 		name: z.string(),
 		summary: z.string(),
+		members,
 		category: z.enum(APPEARANCE_CATEGORIES),
 		broadcaster: z.string().optional(), // 방송사나 채널 운영자
 		// 일정 페이지에 올릴 날짜(YYYY-MM-DD)와 시각(HH:MM, 한국 시간). 날짜가 없으면 일정에 나오지 않는다.

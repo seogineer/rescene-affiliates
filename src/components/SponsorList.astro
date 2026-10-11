@@ -2,6 +2,7 @@
 import { url, newIssueUrl } from '../config';
 import { getSponsors } from '../lib/sponsors';
 import { ytThumb } from '../lib/youtube';
+import MemberBadges from './MemberBadges.astro';
 const items = await getSponsors();
 const statuses = ['진행중', '확인필요', '종료'].filter((st) => items.some(({ entry }) => entry.data.status === st));
 const types = [...new Set(items.map(({ entry }) => entry.data.type))];
@@ -21,7 +22,7 @@ const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 <p id="s-empty" class="meta" hidden>조건에 맞는 기업이 없습니다. <a href={newIssueUrl('new-sponsor.yml')}>기업 제보하기</a></p>
 <div class="grid" id="s-grid">
 	{items.map(({ entry: s, scene, cover, tone }) => (
-		<article class="card" data-status={s.data.status} data-type={s.data.type} data-text={`${s.data.name} ${s.data.summary}`.toLowerCase()}>
+		<article class="card" data-status={s.data.status} data-type={s.data.type} data-text={`${s.data.name} ${s.data.members.join(' ')} ${s.data.summary}`.toLowerCase()}>
 			{cover ? (
 				<div class="cover"><img src={ytThumb(cover)} alt="" loading="lazy" /><span class="scene-tag">SCENE {scene}</span></div>
 			) : (
@@ -31,6 +32,7 @@ const types = [...new Set(items.map(({ entry }) => entry.data.type))];
 				<div class="badges">
 					<span class={`badge ${s.data.status}`}>{s.data.status}</span>
 					<span class="badge">{s.data.type}</span>
+					<MemberBadges members={s.data.members} />
 					{s.data.sample && <span class="badge sample">샘플</span>}
 				</div>
 				<h3><a class="stretch" href={url(`sponsors/${s.id}/`)}>{s.data.name}</a></h3>

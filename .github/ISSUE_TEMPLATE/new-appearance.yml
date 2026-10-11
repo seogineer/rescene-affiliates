@@ -24,6 +24,17 @@ body:
     attributes:
       label: 출연 영상 링크
       description: 방송사·채널이 올린 공식 영상 주소만 적어주세요. 팬 재업로드는 받지 않습니다.
+  - type: checkboxes
+    id: members
+    attributes:
+      label: 해당 멤버
+      description: 그룹 전체면 비워 두세요. 특정 멤버만 해당할 때만 고릅니다.
+      options:
+        - label: 원이
+        - label: 미나미
+        - label: 리브
+        - label: 메이
+        - label: 제나
   - type: textarea
     id: source
     attributes:

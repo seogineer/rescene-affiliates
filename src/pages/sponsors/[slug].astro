@@ -4,6 +4,7 @@ import MediaCard from '../../components/MediaCard.astro';
 import { url, editUrl, newIssueUrl } from '../../config';
 import { getSponsors } from '../../lib/sponsors';
 import { ytThumb } from '../../lib/youtube';
+import MemberBadges from '../../components/MemberBadges.astro';
 
 export async function getStaticPaths() {
 	const items = await getSponsors();
@@ -22,6 +23,7 @@ const period = [d.startDate, d.endDate ?? (d.status === '진행중' ? '현재' :
 			<div class="badges">
 				<span class={`badge ${d.status}`}>{d.status}</span>
 				<span class="badge">{d.type}</span>
+				<MemberBadges members={d.members} link />
 				{d.sample && <span class="badge sample">샘플</span>}
 			</div>
 			{d.sample && <div class="notice">⚠️ 이 문서는 형식을 보여주는 예시 데이터이며 실제 후원 정보가 아닙니다.</div>}

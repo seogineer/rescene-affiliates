@@ -208,3 +208,10 @@ footer.site .foot-nav a:hover { color: var(--rose); }
 .faq { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 4px 18px; margin: 10px 0; }
 .faq summary { cursor: pointer; font-weight: 600; padding: 12px 0; }
 .faq p { margin: 0 0 14px; color: var(--muted); }
+
+/* members */
+.badge.member { background: var(--indigo); border-color: var(--indigo); color: #fff; text-decoration: none; }
+a.badge.member:hover { background: var(--rose); border-color: var(--rose); }
+.member-nav { align-items: center; margin: 14px 0 0; }
+.member-nav .chip { text-decoration: none; }
+.hero .member-nav { margin: 18px 0 0; }
