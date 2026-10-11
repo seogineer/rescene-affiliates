@@ -21,8 +21,10 @@ jobs:
         id: check
         run: |
           set +e
-          node scripts/check-links.mjs | tee report.txt
-          echo "broken=$?" >> "$GITHUB_OUTPUT"
+          node scripts/check-links.mjs > report.txt
+          status=$?
+          cat report.txt
+          echo "broken=$status" >> "$GITHUB_OUTPUT"
       - name: Open or update issue
         if: steps.check.outputs.broken == '1'
         env:
