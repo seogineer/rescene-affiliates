@@ -46,7 +46,7 @@ const activeCount = items.filter(({ entry }) => entry.data.status === '진행중
 			<div class="stat"><b>{appearances.length}</b><span>출연</span></div>
 		</div>
 		<div class="gsearch" role="search">
-			<input id="g-q" type="search" placeholder="기업·프로그램·행사 검색 (예: 인기가요, ㅇㄱㄱㅇ, mlb)" aria-label="통합 검색" autocomplete="off" />
+			<input id="g-q" type="search" placeholder="검색 (예: 인기가요, ㅇㄱㄱㅇ)" aria-label="통합 검색" autocomplete="off" />
 			<ul id="g-results" class="events" hidden></ul>
 			<script id="g-data" type="application/json" set:html={JSON.stringify(searchIndex).replace(/</g, '\\u003c')}></script>
 		</div>
