@@ -1,20 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
+import MediaCard from '../../components/MediaCard.astro';
 import MemberBadges from '../../components/MemberBadges.astro';
 import { url } from '../../config';
 import { getSponsors } from '../../lib/sponsors';
 import { getAppearances } from '../../lib/appearances';
-import { MEMBERS, MEMBER_SLUG, forMember } from '../../lib/members';
+import { MEMBERS, MEMBER_SLUG, forMember, mediaForMember } from '../../lib/members';
 
 export async function getStaticPaths() {
 	const sponsors = (await getSponsors()).map((s) => ({ ...s, members: s.entry.data.members }));
 	const appearances = (await getAppearances()).map((a) => ({ ...a, members: a.entry.data.members }));
-	return MEMBERS.map((member) => ({
-		params: { member: MEMBER_SLUG[member] },
-		props: { member, sponsors: forMember(sponsors, member), appearances: forMember(appearances, member) },
-	}));
+	return MEMBERS.map((member) => {
+		// 문서 단위 태그 + 영상 단위 태그. 같은 문서의 영상은 문서 아래에 모은다.
+		const clips = [
+			...sponsors.map((s) => ({ kind: '기업', href: `sponsors/${s.entry.id}/`, doc: s.entry.data.name, media: mediaForMember(s.entry.data.media, s.members, member) })),
+			...appearances.map((a) => ({ kind: '출연', href: `appearances/${a.entry.id}/`, doc: a.entry.data.name, media: mediaForMember(a.entry.data.media, a.members, member) })),
+		].filter((c) => c.media.length > 0);
+		return {
+			params: { member: MEMBER_SLUG[member] },
+			props: { member, sponsors: forMember(sponsors, member), appearances: forMember(appearances, member), clips },
+		};
+	});
 }
-const { member, sponsors, appearances } = Astro.props;
+const { member, sponsors, appearances, clips } = Astro.props;
+const clipCount = clips.reduce((n, c) => n + c.media.length, 0);
 ---
 <Base title={`${member}`} description={`리센느 ${member}가 개인으로 함께한 기업과 출연을 모았습니다.`}>
 	<a class="back" href={url()}>← 처음으로</a>
@@ -48,6 +57,18 @@ const { member, sponsors, appearances } = Astro.props;
 					{latest && <span class="meta">최근 {latest}</span>}
 				</li>
 			))}</ul>
+		)}
+
+		{clips.length > 0 && (
+			<>
+				<h2>{member}가 나오는 영상·이미지 <small class="count">{clipCount}</small></h2>
+				{clips.map((c) => (
+					<section class="clips">
+						<h3><a href={url(c.href)}>{c.doc}</a> <span class="badge">{c.kind}</span></h3>
+						<div class="media-grid">{c.media.map((m) => <MediaCard {...m} />)}</div>
+					</section>
+				))}
+			</>
 		)}
 	</article>
 </Base>

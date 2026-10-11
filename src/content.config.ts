@@ -11,6 +11,9 @@ const sources = z
 	.array(z.object({ title: z.string(), url: z.url() }))
 	.min(1, '출처를 1개 이상 적어주세요');
 
+// 특정 멤버만 해당할 때만 적는다. 비워 두면 그룹 전체로 본다.
+const members = z.array(z.enum(MEMBERS)).default([]);
+
 // 이미지/영상은 파일이나 CDN 주소가 아닌 "게시물 링크"만 저장한다. 기업과 출연이 같은 형식을 쓴다.
 const media = z
 	.array(
@@ -22,12 +25,10 @@ const media = z
 			// 유튜브 쇼츠 같은 세로 영상은 portrait로 적으면 세로 비율로 보여준다.
 			orientation: z.enum(['landscape', 'portrait']).default('landscape'),
 			date: dateStr.optional(),
+			members, // 영상·이미지에 특정 멤버만 나올 때
 		}),
 	)
 	.default([]);
-
-// 특정 멤버만 해당할 때만 적는다. 비워 두면 그룹 전체로 본다.
-const members = z.array(z.enum(MEMBERS)).default([]);
 
 // 검색에서만 쓰는 다른 이름(약칭·영문·초성 검색용 표기).
 const aliases = z.array(z.string()).default([]);

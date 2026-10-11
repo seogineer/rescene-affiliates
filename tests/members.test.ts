@@ -12,3 +12,13 @@ test('forMember는 해당 멤버가 적힌 항목만 고르고 그룹 전체(빈
 	assert.deepEqual(forMember(items, '원이').map((i) => i.n), ['a', 'c']);
 	assert.deepEqual(forMember(items, '메이'), []);
 });
+
+import { mediaForMember } from '../src/lib/members.ts';
+
+test('mediaForMember는 영상에 적힌 멤버를 따르고, 안 적힌 영상은 문서가 한 명일 때만 그 멤버로 본다', () => {
+	const media = [{ t: 'a', members: ['리브'] }, { t: 'b', members: [] }, { t: 'c' }];
+	assert.deepEqual(mediaForMember(media, [], '리브').map((m) => m.t), ['a']);
+	assert.deepEqual(mediaForMember(media, ['원이'], '원이').map((m) => m.t), ['b', 'c']);
+	assert.deepEqual(mediaForMember(media, ['원이'], '리브').map((m) => m.t), ['a']);
+	assert.deepEqual(mediaForMember(media, ['원이', '미나미'], '원이'), []);
+});

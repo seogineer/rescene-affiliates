@@ -221,3 +221,7 @@ a.badge.member:hover { background: var(--rose); border-color: var(--rose); }
 .gsearch input { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 12px 20px; }
 .gsearch input:focus { outline: 2px solid var(--rose); outline-offset: 1px; }
 .gsearch .events { margin-top: 10px; }
+.clips { margin: 18px 0 28px; }
+.clips h3 { font-family: var(--display); font-size: 1.15rem; margin: 0 0 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.clips h3 a { color: var(--fg); text-decoration: none; }
+.clips h3 a:hover { color: var(--rose); }
