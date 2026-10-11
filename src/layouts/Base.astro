@@ -1,15 +1,13 @@
 ---
 import '../styles/global.css';
 import { clip, jsonLdString } from '../lib/seo';
-import { ytThumb } from '../lib/youtube';
-import { HERO } from '../data/official';
 import { url, REPO_URL, newIssueUrl, GOATCOUNTER } from '../config';
 interface Props { title?: string; description?: string; image?: string; fullTitle?: string; jsonLd?: unknown[] }
 const DEFAULT_DESC = '리센느와 함께한 기업과 기업이 공개한 이미지·영상을 팬들이 함께 기록하는 비공식 팬 위키';
 const { title, description: rawDesc = DEFAULT_DESC, image: ownImage, fullTitle, jsonLd = [] } = Astro.props;
 const description = clip(rawDesc);
-// 문서에 커버가 없어도 공유 미리보기가 비지 않게 공식 영상 썸네일을 기본으로 쓴다.
-const image = ownImage ?? ytThumb(HERO.id, 'maxresdefault');
+// 문서에 커버가 없으면 사이트 기본 공유 이미지(public/og.png, 1200x630)를 쓴다.
+const image = ownImage ?? new URL(url('og.png'), Astro.site).href;
 const updated = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Seoul' }).format(new Date());
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const full = fullTitle ?? (title ? `${title} · 리센느 계열사` : '리센느 계열사 · 리센느와 함께한 기업 위키');
@@ -36,6 +34,7 @@ const full = fullTitle ?? (title ? `${title} · 리센느 계열사` : '리센�
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={image} />
+		{!ownImage && <><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /></>}
 		<meta property="og:locale" content="ko_KR" />
 		{import.meta.env.PROD && <script is:inline async data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
 		<meta name="twitter:card" content="summary_large_image" />

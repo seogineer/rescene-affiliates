@@ -27,7 +27,6 @@ const searchIndex = [
 const activeCount = items.filter(({ entry }) => entry.data.status === '진행중').length;
 ---
 <Base
-	image={ytThumb(HERO.id, 'maxresdefault')}
 	fullTitle="리센느(RESCENE) 팬 사이트 · 리마인(REMINE) 위키 - 광고·출연·일정 정리 | 리센느 계열사"
 	description="리센느(RESCENE)가 광고·협찬으로 함께한 기업, 출연한 예능·음악방송·라디오·유튜브와 행사 일정을 출처와 함께 정리한 리마인(REMINE) 팬 위키입니다."
 	jsonLd={[website(new URL(url(), Astro.site).href)]}
